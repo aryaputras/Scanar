@@ -14,6 +14,8 @@
 		C003CF742588FF3100898752 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C003CF732588FF3100898752 /* Assets.xcassets */; };
 		C003CF772588FF3100898752 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C003CF752588FF3100898752 /* LaunchScreen.storyboard */; };
 		C003CF802588FF9200898752 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF7F2588FF9200898752 /* Helper.swift */; };
+		C003CF86258903DF00898752 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C003CF85258903DF00898752 /* CloudKit.framework */; };
+		C003CF882589063700898752 /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF872589063700898752 /* QRScanViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,9 @@
 		C003CF762588FF3100898752 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C003CF782588FF3100898752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C003CF7F2588FF9200898752 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		C003CF82258903DA00898752 /* Scanar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scanar.entitlements; sourceTree = "<group>"; };
+		C003CF85258903DF00898752 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		C003CF872589063700898752 /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C003CF86258903DF00898752 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +50,7 @@
 			children = (
 				C003CF692588FF2F00898752 /* Scanar */,
 				C003CF682588FF2F00898752 /* Products */,
+				C003CF84258903DF00898752 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,16 +65,26 @@
 		C003CF692588FF2F00898752 /* Scanar */ = {
 			isa = PBXGroup;
 			children = (
+				C003CF82258903DA00898752 /* Scanar.entitlements */,
 				C003CF6A2588FF2F00898752 /* AppDelegate.swift */,
 				C003CF6C2588FF2F00898752 /* art.scnassets */,
 				C003CF6E2588FF2F00898752 /* ViewController.swift */,
 				C003CF7F2588FF9200898752 /* Helper.swift */,
+				C003CF872589063700898752 /* QRScanViewController.swift */,
 				C003CF702588FF2F00898752 /* Main.storyboard */,
 				C003CF732588FF3100898752 /* Assets.xcassets */,
 				C003CF752588FF3100898752 /* LaunchScreen.storyboard */,
 				C003CF782588FF3100898752 /* Info.plist */,
 			);
 			path = Scanar;
+			sourceTree = "<group>";
+		};
+		C003CF84258903DF00898752 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C003CF85258903DF00898752 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C003CF882589063700898752 /* QRScanViewController.swift in Sources */,
 				C003CF6F2588FF2F00898752 /* ViewController.swift in Sources */,
 				C003CF6B2588FF2F00898752 /* AppDelegate.swift in Sources */,
 				C003CF802588FF9200898752 /* Helper.swift in Sources */,
@@ -290,6 +308,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Scanar/Scanar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3QN5S48CNC;
 				INFOPLIST_FILE = Scanar/Info.plist;
@@ -309,6 +328,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Scanar/Scanar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3QN5S48CNC;
 				INFOPLIST_FILE = Scanar/Info.plist;
