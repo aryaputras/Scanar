@@ -18,6 +18,9 @@
 		C003CF882589063700898752 /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF872589063700898752 /* QRScanViewController.swift */; };
 		C003CF8C258983DA00898752 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF8B258983DA00898752 /* Networking.swift */; };
 		C003CF992589D09300898752 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF982589D09300898752 /* FileManager.swift */; };
+		C003CFA02589E9AE00898752 /* AddNewZoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF9F2589E9AE00898752 /* AddNewZoneViewController.swift */; };
+		C03000A42589F83000EF5EA6 /* SuccesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03000A32589F83000EF5EA6 /* SuccesViewController.swift */; };
+		C0F877A32589F04000E5C075 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F877A22589F04000E5C075 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,9 @@
 		C003CF872589063700898752 /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
 		C003CF8B258983DA00898752 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		C003CF982589D09300898752 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		C003CF9F2589E9AE00898752 /* AddNewZoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewZoneViewController.swift; sourceTree = "<group>"; };
+		C03000A32589F83000EF5EA6 /* SuccesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccesViewController.swift; sourceTree = "<group>"; };
+		C0F877A22589F04000E5C075 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,11 +78,8 @@
 				C003CF82258903DA00898752 /* Scanar.entitlements */,
 				C003CF6A2588FF2F00898752 /* AppDelegate.swift */,
 				C003CF6C2588FF2F00898752 /* art.scnassets */,
-				C003CF6E2588FF2F00898752 /* ViewController.swift */,
-				C003CF7F2588FF9200898752 /* Helper.swift */,
-				C003CF8B258983DA00898752 /* Networking.swift */,
-				C003CF982589D09300898752 /* FileManager.swift */,
-				C003CF872589063700898752 /* QRScanViewController.swift */,
+				C03000A62589F86900EF5EA6 /* Helper */,
+				C0FA84002589F69300BC998D /* View Controller */,
 				C003CF702588FF2F00898752 /* Main.storyboard */,
 				C003CF732588FF3100898752 /* Assets.xcassets */,
 				C003CF752588FF3100898752 /* LaunchScreen.storyboard */,
@@ -91,6 +94,28 @@
 				C003CF85258903DF00898752 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C03000A62589F86900EF5EA6 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C003CF7F2588FF9200898752 /* Helper.swift */,
+				C003CF8B258983DA00898752 /* Networking.swift */,
+				C003CF982589D09300898752 /* FileManager.swift */,
+				C0F877A22589F04000E5C075 /* ImagePicker.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		C0FA84002589F69300BC998D /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C003CF6E2588FF2F00898752 /* ViewController.swift */,
+				C03000A32589F83000EF5EA6 /* SuccesViewController.swift */,
+				C003CF9F2589E9AE00898752 /* AddNewZoneViewController.swift */,
+				C003CF872589063700898752 /* QRScanViewController.swift */,
+			);
+			path = "View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,10 +189,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C003CFA02589E9AE00898752 /* AddNewZoneViewController.swift in Sources */,
 				C003CF882589063700898752 /* QRScanViewController.swift in Sources */,
 				C003CF8C258983DA00898752 /* Networking.swift in Sources */,
 				C003CF6F2588FF2F00898752 /* ViewController.swift in Sources */,
+				C03000A42589F83000EF5EA6 /* SuccesViewController.swift in Sources */,
 				C003CF992589D09300898752 /* FileManager.swift in Sources */,
+				C0F877A32589F04000E5C075 /* ImagePicker.swift in Sources */,
 				C003CF6B2588FF2F00898752 /* AppDelegate.swift in Sources */,
 				C003CF802588FF9200898752 /* Helper.swift in Sources */,
 			);

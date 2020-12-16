@@ -32,14 +32,17 @@ func downloadFiles(ref: [CKAsset], zoneID: String){
         do {
             let imageData = try Data(contentsOf: (asset.fileURL!))
             
-            let destinationPath = NSURL(fileURLWithPath: dataPath.absoluteString).appendingPathComponent("\(GenerateRandom()).png", isDirectory: false)
+            let destinationPath = NSURL(fileURLWithPath: dataPath.absoluteString).appendingPathComponent("reference-\(GenerateUniqueFileSuffix()).png", isDirectory: false)
             
             FileManager.default.createFile(atPath: destinationPath!.path, contents:imageData, attributes:nil)
         } catch {
             print(error.localizedDescription)
         }
     }
+    
+    
     ///downlloading assets belum
+
     
     
  

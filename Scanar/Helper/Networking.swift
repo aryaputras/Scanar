@@ -87,7 +87,11 @@ func joinZone(zoneID: String){
             
             var referenceAssets = fetchedRecords[0].object(forKey: "references") as! [CKAsset]
             
-            var zoneIDString = fetchedRecords[0].object(forKey: "zoneID") as! String
+            var zoneIDString =
+                
+                
+                
+                fetchedRecords[0].object(forKey: "zoneID") as! String
             
             
             //assets belum di download

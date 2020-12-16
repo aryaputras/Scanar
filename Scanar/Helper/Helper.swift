@@ -25,6 +25,19 @@ func GenerateRandom()->String{
     //If already exist, regenerate another
 }
 
+func GenerateUniqueFileSuffix()->String{
+    //Generate
+    let length = 4
+    let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+     var s = ""
+     for _ in 0 ..< length {
+         s.append(letters.randomElement()!)
+     }
+     return s
+    //If already exist, regenerate another
+}
+
+
 
 
 
