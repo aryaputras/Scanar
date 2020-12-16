@@ -7,6 +7,7 @@
 
 import Foundation
 import CloudKit
+import UIKit
 
 func downloadFiles(ref: [CKAsset], zoneID: String){
     //1. Bikin folder
@@ -46,6 +47,26 @@ func downloadFiles(ref: [CKAsset], zoneID: String){
     
     
  
+}
+
+
+func imageToURL(image: UIImage) -> URL{
+    
+    let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+    let documentsDirectory = paths[0]
+    let docURL = URL(fileURLWithPath: documentsDirectory)
+    let dataPath = docURL.appendingPathComponent("cache\(GenerateUniqueFileSuffix()).jpg")
+   
+    if !FileManager.default.fileExists(atPath: dataPath.absoluteString) {
+        do {
+            try image.jpegData(compressionQuality: 0.8)?.write(to: dataPath.absoluteURL)
+            print("created file")
+        } catch {
+            print("error creating file")
+        }
+    }
+    
+    return dataPath.absoluteURL
 }
 
 

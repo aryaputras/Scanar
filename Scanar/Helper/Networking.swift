@@ -20,6 +20,8 @@ func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: 
     //Setup assets
     var ref = [CKAsset]()
     var ass = [CKAsset]()
+    
+    
     for asset in references{
         let assetURL = CKAsset(fileURL: asset.absoluteURL)
         ref.append(assetURL)
@@ -54,20 +56,29 @@ func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: 
 
 func isZoneAvailable(zoneIDToCheck: String) -> Bool{
     //Check if zone with such ID exist or not.
-    var result: Bool = false
+    var result: Bool = true
     
     let database = CKContainer.default().publicCloudDatabase
-    let predicate = NSPredicate(format: "zoneID == \(zoneIDToCheck)")
+    let predicate = NSPredicate(format: "zoneID == %@", zoneIDToCheck)
     let query = CKQuery(recordType: "zone", predicate: predicate)
     database.perform(query, inZoneWith: nil) { (record, error) in
-        //Do we need dispatchqueue main async
-        if record != nil {
-            result = false
-        } else {
-            result = true
+        if let fetchedRecords = record {
+            
+                
+                
+                if fetchedRecords.count == 0 {
+                    print(fetchedRecords.count)
+                    result = true
+                } else {
+                    print(fetchedRecords)
+                    result = false
+                }
+            
         }
     }
-   //is this method effective?
+    //is this method effective?
+    
+    //Query blm selesai udh return false
     return result
 }
 
@@ -96,11 +107,11 @@ func joinZone(zoneID: String){
             
             //assets belum di download
             downloadFiles(ref: referenceAssets, zoneID: zoneIDString)
-                //
-                print("Join zone succesful")
-                
-                //Check di core data ada atau tidak filenya, kalo tidak baru query&download. kalo sudah ada langsung ambil dari local dir
-               
+            //
+            print("Join zone succesful")
+            
+            //Check di core data ada atau tidak filenya, kalo tidak baru query&download. kalo sudah ada langsung ambil dari local dir
+            
             
         } else {
             print("Failed to join zone with error: ", error!)

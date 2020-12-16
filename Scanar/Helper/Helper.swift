@@ -73,3 +73,5 @@ func generateQRCode(from string: String) -> UIImage? {
 }
 
 
+
+

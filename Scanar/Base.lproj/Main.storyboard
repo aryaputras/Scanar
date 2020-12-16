@@ -85,7 +85,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
-                                    <action selector="nextClicked:" destination="8Cm-Cb-Oqh" eventType="touchUpInside" id="0zl-kZ-oRC"/>
+                                    <action selector="saveDidTap:" destination="8Cm-Cb-Oqh" eventType="touchUpInside" id="pLE-6q-QHG"/>
                                     <segue destination="awv-rY-NlP" kind="show" identifier="addToResult" id="zlg-bV-eWu"/>
                                 </connections>
                             </button>
@@ -97,6 +97,7 @@
                     <connections>
                         <outlet property="chooseBuuton" destination="X3F-PQ-2AD" id="ohv-tg-BhO"/>
                         <outlet property="imageView" destination="naO-uE-f3g" id="zYy-cJ-rOA"/>
+                        <outlet property="textfield" destination="te8-DO-rKg" id="Wd5-fP-6Wx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vj4-l9-59B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
