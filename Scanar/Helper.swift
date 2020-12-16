@@ -9,6 +9,10 @@ import UIKit
 import Foundation
 
 var zonesData = ["ACX321"]
+
+
+//MARK: -Generator
+
 func GenerateRandom()->String{
     //Generate
     let length = 6
@@ -20,6 +24,8 @@ func GenerateRandom()->String{
      return s
     //If already exist, regenerate another
 }
+
+
 
 
 func GenerateUniqueCode() -> String{
@@ -34,6 +40,7 @@ func GenerateUniqueCode() -> String{
     }
     return result
 }
+
 
 
 

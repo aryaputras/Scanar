@@ -12,9 +12,12 @@ import ARKit
 
 //Get code from Apple sample and medium "how to ARReferenceImage from network
 class ViewController: UIViewController, ARSCNViewDelegate {
+    var newReferenceImages:Set<ARReferenceImage> = Set<ARReferenceImage>();
 
     @IBOutlet var sceneView: ARSCNView!
     
+    
+//MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,16 +32,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = scene
+        
+        
+        
+       
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
+        // Prevent the screen from being dimmed to avoid interuppting the AR experience.
+        UIApplication.shared.isIdleTimerDisabled = true
 
-        // Run the view's session
-        sceneView.session.run(configuration)
+        // Start the AR experience
+        resetTracking()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,18 +54,44 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Pause the view's session
         sceneView.session.pause()
     }
-
-    // MARK: - ARSCNViewDelegate
+//MARK: - Buttons
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
+    @IBAction func newZoneDidTap(_ sender: Any) {
+        
     }
-*/
     
+    
+//MARK: - Image detection
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+     
+     //Run when image detected
+    }
+    
+    
+    func loadImageFrom(url: URL, completionHandler:@escaping(UIImage)->()) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        print("LOADED ASSET");
+                        completionHandler(image);
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    public func resetTracking() {
+        let configuration = ARWorldTrackingConfiguration()
+    configuration.detectionImages = newReferenceImages;
+    configuration.maximumNumberOfTrackedImages = 1;
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
+    
+    // MARK: - Error handling
+    
+
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         
@@ -73,4 +106,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
+    
+
+    
 }
