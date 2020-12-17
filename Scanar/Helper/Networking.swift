@@ -89,38 +89,6 @@ func isZoneAvailable(zoneIDToCheck: String) -> Bool{
 
 //MARK: - Query
 
-func joinZone(zoneID: String){
-    //Query zone
-    let database = CKContainer.default().publicCloudDatabase
-    let predicate = NSPredicate(format: "zoneID == %@", zoneID)
-    let query = CKQuery(recordType: "zone", predicate: predicate)
-    
-    database.perform(query, inZoneWith: nil) { (records, error) in
-        if let fetchedRecords = records {
-            
-            var referenceAssets = fetchedRecords[0].object(forKey: "references") as! [CKAsset]
-            var popupAssets = fetchedRecords[0].object(forKey: "assets") as! [CKAsset]
-            
-            var zoneIDString =
-                
-                
-                
-                fetchedRecords[0].object(forKey: "zoneID") as! String
-            
-            
-            //assets belum di download
-            downloadFiles(ref: referenceAssets, zoneID: zoneIDString, ass: popupAssets)
-            //
-            print("Join zone succesful")
-            
-            //Check di core data ada atau tidak filenya, kalo tidak baru query&download. kalo sudah ada langsung ambil dari local dir
-            
-            
-        } else {
-            print("Failed to join zone with error: ", error!)
-        }
-    }
-    
-}
+
 
 
