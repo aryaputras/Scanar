@@ -9,7 +9,10 @@ import Foundation
 import CloudKit
 import UIKit
 
-func downloadFiles(ref: [CKAsset], zoneID: String){
+
+//return url
+//atau bikin model aja biar tau yg mana file berkaitan sama siapa
+func downloadFiles(ref: [CKAsset], zoneID: String, ass: [CKAsset]){
     //1. Bikin folder
     let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
     let documentsDirectory = paths[0]
@@ -33,9 +36,15 @@ func downloadFiles(ref: [CKAsset], zoneID: String){
         do {
             let imageData = try Data(contentsOf: (asset.fileURL!))
             
+            //KALO FILE = image save as.png
             let destinationPath = NSURL(fileURLWithPath: dataPath.absoluteString).appendingPathComponent("reference-\(GenerateUniqueFileSuffix()).png", isDirectory: false)
             
             FileManager.default.createFile(atPath: destinationPath!.path, contents:imageData, attributes:nil)
+            print("download references succesful")
+            //print file size
+            let resources = try destinationPath?.resourceValues(forKeys:[.fileSizeKey])
+            let fileSize = resources?.fileSize!
+                print ("\(fileSize)")
         } catch {
             print(error.localizedDescription)
         }
@@ -43,8 +52,23 @@ func downloadFiles(ref: [CKAsset], zoneID: String){
     
     
     ///downlloading assets belum
+    for asset in ass {
+        do {
+            let imageData = try Data(contentsOf: (asset.fileURL!))
+            //KALO FILE = image save as.png
+            let destinationPath = NSURL(fileURLWithPath: dataPath.absoluteString).appendingPathComponent("assets-\(GenerateUniqueFileSuffix()).png", isDirectory: false)
+            
+            FileManager.default.createFile(atPath: destinationPath!.path, contents:imageData, attributes:nil)
+            print("download assets succesful")
+            //print file size
+            let resources = try destinationPath?.resourceValues(forKeys:[.fileSizeKey])
+            let fileSize = resources?.fileSize!
+                print ("\(fileSize)")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 
-    
     
  
 }

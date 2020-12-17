@@ -20,6 +20,8 @@
 		C003CF992589D09300898752 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF982589D09300898752 /* FileManager.swift */; };
 		C003CFA02589E9AE00898752 /* AddNewZoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF9F2589E9AE00898752 /* AddNewZoneViewController.swift */; };
 		C03000A42589F83000EF5EA6 /* SuccesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03000A32589F83000EF5EA6 /* SuccesViewController.swift */; };
+		C03000A9258A4E0A00EF5EA6 /* ChoosePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03000A8258A4E0A00EF5EA6 /* ChoosePopupViewController.swift */; };
+		C03000B0258AF68800EF5EA6 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03000AF258AF68800EF5EA6 /* JoinViewController.swift */; };
 		C0F877A32589F04000E5C075 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F877A22589F04000E5C075 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +42,8 @@
 		C003CF982589D09300898752 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		C003CF9F2589E9AE00898752 /* AddNewZoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewZoneViewController.swift; sourceTree = "<group>"; };
 		C03000A32589F83000EF5EA6 /* SuccesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccesViewController.swift; sourceTree = "<group>"; };
+		C03000A8258A4E0A00EF5EA6 /* ChoosePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePopupViewController.swift; sourceTree = "<group>"; };
+		C03000AF258AF68800EF5EA6 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		C0F877A22589F04000E5C075 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,7 +117,9 @@
 				C003CF6E2588FF2F00898752 /* ViewController.swift */,
 				C03000A32589F83000EF5EA6 /* SuccesViewController.swift */,
 				C003CF9F2589E9AE00898752 /* AddNewZoneViewController.swift */,
+				C03000A8258A4E0A00EF5EA6 /* ChoosePopupViewController.swift */,
 				C003CF872589063700898752 /* QRScanViewController.swift */,
+				C03000AF258AF68800EF5EA6 /* JoinViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -189,7 +195,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C03000A9258A4E0A00EF5EA6 /* ChoosePopupViewController.swift in Sources */,
 				C003CFA02589E9AE00898752 /* AddNewZoneViewController.swift in Sources */,
+				C03000B0258AF68800EF5EA6 /* JoinViewController.swift in Sources */,
 				C003CF882589063700898752 /* QRScanViewController.swift in Sources */,
 				C003CF8C258983DA00898752 /* Networking.swift in Sources */,
 				C003CF6F2588FF2F00898752 /* ViewController.swift in Sources */,

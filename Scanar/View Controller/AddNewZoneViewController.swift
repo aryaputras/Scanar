@@ -13,6 +13,7 @@ class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegat
     var choosenImage: UIImage?
     @IBOutlet var imageView: UIImageView!
        @IBOutlet var chooseBuuton: UIButton!
+
     var imagePicker: ImagePicker!
     
 
@@ -32,25 +33,9 @@ class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegat
         self.imagePicker.present(from: sender)
         }
 
+
     
     @IBAction func saveDidTap(_ sender: Any) {
-        var imageRefURL: [URL] = [URL]()
-        var assetsURL: [URL] = [URL]()
-        let zoneID = GenerateUniqueCode()
-        //just save 1 image
-        
-        imageRefURL.append(imageToURL(image: choosenImage!))
-        
-        //assetsURL is fake
-        assetsURL.append(imageToURL(image: choosenImage!))
-        //Remove force unwrap and give UI warning if field is empty
-        
-        if isZoneAvailable(zoneIDToCheck: zoneID) == true {
-            print(assetsURL[0].dataRepresentation)
-            uploadNewZone(zoneID: zoneID, references: imageRefURL, zoneName: textfield.text ?? "", assets: assetsURL)
-        } else {
-            print("Zone ID duplicate available ")
-        }
     }
     
 //MARK: - Keyboard
@@ -72,6 +57,15 @@ class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegat
         view.endEditing(true)
     }
  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addRefToAsset" {
+            let vc = segue.destination as! ChoosePopupViewController
+            vc.refImage = choosenImage
+            vc.zoneName = textfield.text!
+            
+            
+        }
+    }
 }
 //MARK: - Extensions
 extension AddNewZoneViewController: ImagePickerDelegate {
@@ -80,4 +74,6 @@ extension AddNewZoneViewController: ImagePickerDelegate {
         self.imageView.image = image
         self.choosenImage = image
     }
+    
+    
 }

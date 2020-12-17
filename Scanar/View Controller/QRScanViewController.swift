@@ -1,10 +1,21 @@
 import AVFoundation
 import UIKit
 
+protocol ChildToParentProtocol:class {
+
+
+       
+        func needToPassInfoToParent(with value:String)
+
+    }
+
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    
+    weak var delegate:ChildToParentProtocol? = nil
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
-
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,7 +51,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
 
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
+        //set preview layer yg bener
+        previewLayer.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
 
@@ -80,15 +92,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             found(code: stringValue)
         }
 
-        dismiss(animated: true)
+       
     }
 
     func found(code: String) {
         print(code)
-        //This is the string contains zone ID gotten from QR. the return should be used as a query and download all assets with this zone ID
-        
+      
+        delegate?.needToPassInfoToParent(with: code)
     }
-
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -96,4 +108,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
+    
 }
+

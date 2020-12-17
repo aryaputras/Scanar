@@ -13,11 +13,11 @@ import ARKit
 //Get code from Apple sample and medium "how to ARReferenceImage from network
 class ViewController: UIViewController, ARSCNViewDelegate {
     var newReferenceImages:Set<ARReferenceImage> = Set<ARReferenceImage>();
-
+    
     @IBOutlet var sceneView: ARSCNView!
     
     
-//MARK: - View Controller Life Cycle
+    //MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +35,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         
         
-       
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -43,7 +43,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Prevent the screen from being dimmed to avoid interuppting the AR experience.
         UIApplication.shared.isIdleTimerDisabled = true
-
+        
         // Start the AR experience
         resetTracking()
     }
@@ -54,18 +54,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Pause the view's session
         sceneView.session.pause()
     }
-//MARK: - Buttons
+    //MARK: - Buttons
     
     @IBAction func newZoneDidTap(_ sender: Any) {
         
     }
     
     
-//MARK: - Image detection
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-     
-     //Run when image detected
-    }
+    //MARK: - Image detection
+    
+//    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+//        
+//        //Run when image detected
+//    }
     
     
     func loadImageFrom(url: URL, completionHandler:@escaping(UIImage)->()) {
@@ -84,14 +85,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     public func resetTracking() {
         let configuration = ARWorldTrackingConfiguration()
-    configuration.detectionImages = newReferenceImages;
-    configuration.maximumNumberOfTrackedImages = 1;
+        configuration.detectionImages = newReferenceImages;
+        configuration.maximumNumberOfTrackedImages = 1;
+        configuration.environmentTexturing = .automatic
+        configuration.frameSemantics.insert(.personSegmentationWithDepth)
         sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
     
     // MARK: - Error handling
     
-
+    
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         
@@ -107,6 +110,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-
+    
     
 }

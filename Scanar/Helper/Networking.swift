@@ -30,6 +30,7 @@ func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: 
         let assetURL = CKAsset(fileURL: asset.absoluteURL)
         ass.append(assetURL)
     }
+    
     //Things to write
     let zoneIDRecordValue = zoneID as CKRecordValue
     let zoneNameRecordValue = zoneName as CKRecordValue
@@ -40,13 +41,14 @@ func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: 
     //set value
     newRecord.setObject(zoneIDRecordValue, forKey: "zoneID")
     newRecord.setObject(zoneNameRecordValue, forKey: "zoneName")
-    newRecord.setObject(refRecordValue, forKey: "references")
-    newRecord.setObject(assRecordValue, forKey: "assets")
+    newRecord.setValue(refRecordValue, forKey: "references")
+    newRecord.setValue(assRecordValue, forKey: "assets")
+    //SETVALUE ASSETS
     
     //operation
     database.save(newRecord) { (record, error) in
         if error != nil {
-            print("error write operation")
+            print(error?.localizedDescription)
         } else {
             print("write new zone succesful")
         }
@@ -64,21 +66,21 @@ func isZoneAvailable(zoneIDToCheck: String) -> Bool{
     database.perform(query, inZoneWith: nil) { (record, error) in
         if let fetchedRecords = record {
             
-                
-                
-                if fetchedRecords.count == 0 {
-                    print(fetchedRecords.count)
-                    result = true
-                } else {
-                    print(fetchedRecords)
-                    result = false
-                }
+            
+            
+            if fetchedRecords.count == 0 {
+                print(fetchedRecords.count)
+                result = true
+            } else {
+                print(fetchedRecords)
+                result = false
+            }
             
         }
     }
     //is this method effective?
     
-    //Query blm selesai udh return false
+    //Query blm selesai udh return true
     return result
 }
 
@@ -90,13 +92,14 @@ func isZoneAvailable(zoneIDToCheck: String) -> Bool{
 func joinZone(zoneID: String){
     //Query zone
     let database = CKContainer.default().publicCloudDatabase
-    let predicate = NSPredicate(format: "zoneID == \(zoneID)")
+    let predicate = NSPredicate(format: "zoneID == %@", zoneID)
     let query = CKQuery(recordType: "zone", predicate: predicate)
     
     database.perform(query, inZoneWith: nil) { (records, error) in
         if let fetchedRecords = records {
             
             var referenceAssets = fetchedRecords[0].object(forKey: "references") as! [CKAsset]
+            var popupAssets = fetchedRecords[0].object(forKey: "assets") as! [CKAsset]
             
             var zoneIDString =
                 
@@ -106,7 +109,7 @@ func joinZone(zoneID: String){
             
             
             //assets belum di download
-            downloadFiles(ref: referenceAssets, zoneID: zoneIDString)
+            downloadFiles(ref: referenceAssets, zoneID: zoneIDString, ass: popupAssets)
             //
             print("Join zone succesful")
             

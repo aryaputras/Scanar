@@ -8,10 +8,13 @@
 import UIKit
 
 class SuccesViewController: UIViewController {
-    
+    @IBOutlet weak var QRImageView: UIImageView!
+    @IBOutlet weak var zoneIDLabel: UILabel!
+    var zoneID: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        QRImageView.image = generateQRCode(from: zoneID!)
+        zoneIDLabel.text = zoneID
         // Do any additional setup after loading the view.
     }
     
