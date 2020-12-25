@@ -13,12 +13,16 @@ class SuccesViewController: UIViewController {
     var zoneID: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        QRImageView.image = generateQRCode(from: zoneID!)
+    QRImageView.image = generateQRCode(from: zoneID!)
         zoneIDLabel.text = zoneID
         // Do any additional setup after loading the view.
     }
     
-
+    
+    
+    @IBAction func shareClicked(_ sender: Any) {
+    }
+    
     /*
     // MARK: - Navigation
 

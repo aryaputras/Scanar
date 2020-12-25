@@ -16,8 +16,13 @@ extension Downloaded {
         return NSFetchRequest<Downloaded>(entityName: "Downloaded")
     }
 
-    @NSManaged public var assets: NSObject?
-    @NSManaged public var references: NSObject?
+    @NSManaged public var assets: URL?
+    @NSManaged public var references: URL?
+    @NSManaged public var zoneID: String?
+    @NSManaged public var position: [Double]?
+    @NSManaged public var rotation: [Double]?
+    
+    
 
 }
 

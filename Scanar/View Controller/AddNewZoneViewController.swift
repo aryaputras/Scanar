@@ -62,9 +62,12 @@ class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegat
             let vc = segue.destination as! ChoosePopupViewController
             vc.refImage = choosenImage
             vc.zoneName = textfield.text!
+         
             
             
         }
+        
+        
     }
 }
 //MARK: - Extensions

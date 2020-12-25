@@ -15,44 +15,38 @@ class ChoosePopupViewController: UIViewController, UIImagePickerControllerDelega
     var imagePicker: ImagePicker!
     var zoneName: String = ""
     var zoneID: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
-        print(zoneName)
+        print(refImage)
+        
+       
     }
     
-
+    
     @IBAction func btnClicked(_ sender: UIButton) {
         self.imagePicker.present(from: sender)
     }
     
      @IBAction func saveClicked(_ sender: Any) {
-        var imageRefURL: [URL] = [URL]()
-        var assetsURL: [URL] = [URL]()
-        zoneID = GenerateUniqueCode()
-        //just save 1 image
-        
-        imageRefURL.append(imageToURL(image: refImage!))
-        
-        //assetsURL is fake
-        assetsURL.append(imageToURL(image: assetImage!))
-        //Remove force unwrap and give UI warning if field is empty
-        
-        if isZoneAvailable(zoneIDToCheck: zoneID!) == true {
-            
-            uploadNewZone(zoneID: zoneID!, references: imageRefURL, zoneName: zoneName, assets: assetsURL)
-            performSegue(withIdentifier: "saveToFinish", sender: self)
-        } else {
-            print("Zone ID duplicate available ")
-        }
-
+      //performsegue ke anchor4
+performSegue(withIdentifier: "saveToAnchor", sender: self)
      }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "saveToFinish" {
-            let vc = segue.destination as! SuccesViewController
+        if segue.identifier == "saveToAnchor" {
+            let vc = segue.destination as! AnchoringViewController
             vc.zoneID = zoneID
+            vc.zoneName = zoneName
+            vc.assetImage = assetImage
+            
+            vc.refImage = refImage
+            
+            
+           
             
             
         }

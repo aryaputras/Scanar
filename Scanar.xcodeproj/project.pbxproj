@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		C003CF6B2588FF2F00898752 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF6A2588FF2F00898752 /* AppDelegate.swift */; };
-		C003CF6F2588FF2F00898752 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF6E2588FF2F00898752 /* ViewController.swift */; };
+		C003CF6F2588FF2F00898752 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF6E2588FF2F00898752 /* ARViewController.swift */; };
 		C003CF802588FF9200898752 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF7F2588FF9200898752 /* Helper.swift */; };
 		C003CF86258903DF00898752 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C003CF85258903DF00898752 /* CloudKit.framework */; };
 		C003CF882589063700898752 /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF872589063700898752 /* QRScanViewController.swift */; };
 		C003CF8C258983DA00898752 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF8B258983DA00898752 /* Networking.swift */; };
 		C003CF992589D09300898752 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF982589D09300898752 /* FileManager.swift */; };
 		C003CFA02589E9AE00898752 /* AddNewZoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003CF9F2589E9AE00898752 /* AddNewZoneViewController.swift */; };
+		C02D2CAD259311AB0004761B /* AnchoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D2CAC259311AB0004761B /* AnchoringViewController.swift */; };
+		C02DC6E6258CE49600E6D2F2 /* StyleTransferModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C02DC6E5258CE49600E6D2F2 /* StyleTransferModel.mlmodel */; };
+		C02DC6EB258CE57900E6D2F2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02DC6EA258CE57900E6D2F2 /* HomeViewController.swift */; };
 		C03000A42589F83000EF5EA6 /* SuccesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03000A32589F83000EF5EA6 /* SuccesViewController.swift */; };
 		C03000A9258A4E0A00EF5EA6 /* ChoosePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03000A8258A4E0A00EF5EA6 /* ChoosePopupViewController.swift */; };
 		C03000B0258AF68800EF5EA6 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03000AF258AF68800EF5EA6 /* JoinViewController.swift */; };
@@ -55,7 +58,7 @@
 		C003CF672588FF2F00898752 /* Scanar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scanar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C003CF6A2588FF2F00898752 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C003CF6C2588FF2F00898752 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		C003CF6E2588FF2F00898752 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C003CF6E2588FF2F00898752 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		C003CF732588FF3100898752 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C003CF762588FF3100898752 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenStoryboard.storyboard; sourceTree = "<group>"; };
 		C003CF782588FF3100898752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +69,9 @@
 		C003CF8B258983DA00898752 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		C003CF982589D09300898752 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		C003CF9F2589E9AE00898752 /* AddNewZoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewZoneViewController.swift; sourceTree = "<group>"; };
+		C02D2CAC259311AB0004761B /* AnchoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchoringViewController.swift; sourceTree = "<group>"; };
+		C02DC6E5258CE49600E6D2F2 /* StyleTransferModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = StyleTransferModel.mlmodel; sourceTree = "<group>"; };
+		C02DC6EA258CE57900E6D2F2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C03000A32589F83000EF5EA6 /* SuccesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccesViewController.swift; sourceTree = "<group>"; };
 		C03000A8258A4E0A00EF5EA6 /* ChoosePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePopupViewController.swift; sourceTree = "<group>"; };
 		C03000AF258AF68800EF5EA6 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				C0634CD2258BC98B006661BF /* Downloaded+CoreDataClass.swift */,
+				C02DC6E5258CE49600E6D2F2 /* StyleTransferModel.mlmodel */,
 				C0634CD3258BC98B006661BF /* Downloaded+CoreDataProperties.swift */,
 				C003CF692588FF2F00898752 /* Scanar */,
 				C003CF682588FF2F00898752 /* Products */,
@@ -116,7 +123,9 @@
 				C03000A62589F86900EF5EA6 /* Helper */,
 				C0FA84002589F69300BC998D /* View Controller */,
 				C003CF732588FF3100898752 /* Assets.xcassets */,
+				C02DC6D4258CE44D00E6D2F2 /* Scanner */,
 				C0CD6B00258BB54300291E9E /* MainStoryboard.storyboard */,
+				C003CF6E2588FF2F00898752 /* ARViewController.swift */,
 				C0634CC6258BC702006661BF /* Scanar.xcdatamodeld */,
 				C003CF752588FF3100898752 /* LaunchScreenStoryboard.storyboard */,
 				C003CF782588FF3100898752 /* Info.plist */,
@@ -130,6 +139,13 @@
 				C003CF85258903DF00898752 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C02DC6D4258CE44D00E6D2F2 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scanner;
 			sourceTree = "<group>";
 		};
 		C03000A62589F86900EF5EA6 /* Helper */ = {
@@ -146,10 +162,11 @@
 		C0FA84002589F69300BC998D /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C003CF6E2588FF2F00898752 /* ViewController.swift */,
 				C03000A32589F83000EF5EA6 /* SuccesViewController.swift */,
 				C003CF9F2589E9AE00898752 /* AddNewZoneViewController.swift */,
+				C02D2CAC259311AB0004761B /* AnchoringViewController.swift */,
 				C03000A8258A4E0A00EF5EA6 /* ChoosePopupViewController.swift */,
+				C02DC6EA258CE57900E6D2F2 /* HomeViewController.swift */,
 				C003CF872589063700898752 /* QRScanViewController.swift */,
 				C03000AF258AF68800EF5EA6 /* JoinViewController.swift */,
 			);
@@ -229,18 +246,21 @@
 				C04942F0258BB92E0085EBC8 /* art.scnassets in Sources */,
 				C04942EE258BB9290085EBC8 /* Assets.xcassets in Sources */,
 				C0634CD4258BC98B006661BF /* Downloaded+CoreDataClass.swift in Sources */,
+				C02D2CAD259311AB0004761B /* AnchoringViewController.swift in Sources */,
 				C04942EC258BB90E0085EBC8 /* MainStoryboard.storyboard in Sources */,
 				C03000A9258A4E0A00EF5EA6 /* ChoosePopupViewController.swift in Sources */,
 				C003CFA02589E9AE00898752 /* AddNewZoneViewController.swift in Sources */,
+				C02DC6EB258CE57900E6D2F2 /* HomeViewController.swift in Sources */,
 				C03000B0258AF68800EF5EA6 /* JoinViewController.swift in Sources */,
 				C0634CD5258BC98B006661BF /* Downloaded+CoreDataProperties.swift in Sources */,
 				C003CF882589063700898752 /* QRScanViewController.swift in Sources */,
 				C003CF8C258983DA00898752 /* Networking.swift in Sources */,
-				C003CF6F2588FF2F00898752 /* ViewController.swift in Sources */,
+				C003CF6F2588FF2F00898752 /* ARViewController.swift in Sources */,
 				C03000A42589F83000EF5EA6 /* SuccesViewController.swift in Sources */,
 				C003CF992589D09300898752 /* FileManager.swift in Sources */,
 				C0F877A32589F04000E5C075 /* ImagePicker.swift in Sources */,
 				C003CF6B2588FF2F00898752 /* AppDelegate.swift in Sources */,
+				C02DC6E6258CE49600E6D2F2 /* StyleTransferModel.mlmodel in Sources */,
 				C0634CC8258BC702006661BF /* Scanar.xcdatamodeld in Sources */,
 				C003CF802588FF9200898752 /* Helper.swift in Sources */,
 			);

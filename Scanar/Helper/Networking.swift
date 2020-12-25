@@ -12,7 +12,7 @@ import CloudKit
 
 //MARK: - Save
 
-func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: [URL] ){
+func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: [URL], position: [Double], rotation: [Double] ){
     //config
     let database = CKContainer.default().publicCloudDatabase
     let newRecord = CKRecord(recordType: "zone")
@@ -36,6 +36,8 @@ func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: 
     let zoneNameRecordValue = zoneName as CKRecordValue
     let refRecordValue = ref as CKRecordValue
     let assRecordValue = ass as CKRecordValue
+    let positionRecordValue = position as CKRecordValue
+    let rotationRecordValue = rotation as CKRecordValue
     
     
     //set value
@@ -43,10 +45,13 @@ func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: 
     newRecord.setObject(zoneNameRecordValue, forKey: "zoneName")
     newRecord.setValue(refRecordValue, forKey: "references")
     newRecord.setValue(assRecordValue, forKey: "assets")
+    newRecord.setValue(position, forKey: "position")
+    newRecord.setValue(position, forKey: "rotation")
     //SETVALUE ASSETS
     
     //operation
     database.save(newRecord) { (record, error) in
+        
         if error != nil {
             print(error?.localizedDescription)
         } else {
@@ -55,7 +60,7 @@ func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: 
     }
 }
 
-
+//THIS FUNCTION DOES NOT WORK .!
 func isZoneAvailable(zoneIDToCheck: String) -> Bool{
     //Check if zone with such ID exist or not.
     var result: Bool = true

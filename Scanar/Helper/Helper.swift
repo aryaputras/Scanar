@@ -7,6 +7,8 @@
 
 import UIKit
 import Foundation
+import SceneKit
+
 
 var zonesData = ["ACX321"]
 
@@ -72,6 +74,52 @@ func generateQRCode(from string: String) -> UIImage? {
     return nil
 }
 
+
+func convertV3ToDouble(vector: SCNVector3) -> [Double]{
+    var result: [Double] = []
+    result.append(Double(vector.x))
+    result.append(Double(vector.y))
+    result.append(Double(vector.z))
+    
+    return result
+}
+
+
+
+func convertV4ToDouble(vector: SCNVector4) -> [Double]{
+    var result: [Double] = []
+    result.append(Double(vector.x))
+    result.append(Double(vector.y))
+    result.append(Double(vector.z))
+    result.append(Double(vector.w))
+    
+    return result
+}
+
+
+func convertDoubleToV3(doubles: [Double]) -> SCNVector3{
+    let result: SCNVector3 = SCNVector3(doubles[0], doubles[1], doubles[2])
+    print("cek kebalik ngak ya?")
+    return result
+}
+
+
+func convertDoubleToV4(doubles: [Double]) -> SCNVector4{
+    let result: SCNVector4 = SCNVector4(doubles[0], doubles[1], doubles[2], doubles[3])
+    print("cek kebalik ngak ya?")
+    return result
+}
+
+
+
+
+func convertCIImageToCGImage(inputImage: CIImage) -> CGImage! {
+    let context = CIContext(options: nil)
+    if context != nil {
+        return context.createCGImage(inputImage, from: inputImage.extent)
+    }
+    return nil
+}
 
 
 

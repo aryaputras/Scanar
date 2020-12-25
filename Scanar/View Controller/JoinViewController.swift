@@ -7,19 +7,18 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 
-protocol JoinToHomeProtocol:class {
-    func setupAR(refURL: [URL], assURL: [URL])
-}
+
 
 
 class JoinViewController: UIViewController, UITextFieldDelegate {
    
-    var downloaded: [NSManagedObject] = []
+    var downloaded: [Downloaded] = []
 
     var zoneIDPassed: String?
-    weak var delegate:JoinToHomeProtocol? = nil
+  
     @IBOutlet weak var zoneIDLabel: UILabel!
     
     @IBOutlet weak var textfield: UITextField!
@@ -42,7 +41,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         
         //2
         let fetchRequest =
-          NSFetchRequest<NSManagedObject>(entityName: "Downloaded")
+          NSFetchRequest<Downloaded>(entityName: "Downloaded")
         
         //3
         do {
@@ -62,7 +61,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         joinZone(zoneID: zoneIDPassed ?? "")
         
        
-        print(zoneIDPassed)
+        
         
         
     }
@@ -75,7 +74,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         let database = CKContainer.default().publicCloudDatabase
         let predicate = NSPredicate(format: "zoneID == %@", zoneID)
         let query = CKQuery(recordType: "zone", predicate: predicate)
-        
+        print(zoneID)
         database.perform(query, inZoneWith: nil) { (records, error) in
             if let fetchedRecords = records {
                 
@@ -88,7 +87,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                     
                     fetchedRecords[0].object(forKey: "zoneID") as! String
                 
-                
+               
                 //assets belum di download
                 let downloadedAssetsURLs = self.downloadFiles(ref: referenceAssets, zoneID: zoneIDString, ass: popupAssets)
                 
@@ -132,6 +131,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         // 3
         object.setValue(refURL, forKeyPath: "references")
         object.setValue(assURL, forKey: "assets")
+        object.setValue(zoneID, forKey: "zoneID")
         print(refURL)
         print(assURL)
         // 4
@@ -245,6 +245,14 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                 segue.identifier == "homeToContainer" {
                 vc.delegate = self
             }
+        
+        if let vc = segue.destination as? ARViewController,
+            segue.identifier == "goToAR" {
+            vc.idOfZone = zoneIDPassed
+            print(zoneIDPassed)
+           
+        }
+        
         }
     }
 
