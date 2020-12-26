@@ -21,6 +21,8 @@ extension Downloaded {
     @NSManaged public var zoneID: String?
     @NSManaged public var position: [Double]?
     @NSManaged public var rotation: [Double]?
+    @NSManaged public var objectIdentifier: String?
+
     
     
 

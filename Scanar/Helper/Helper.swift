@@ -123,3 +123,16 @@ func convertCIImageToCGImage(inputImage: CIImage) -> CGImage! {
 
 
 
+
+
+func convertTextToSCNText(text: String) -> SCNText {
+    let scntext = SCNText(string: text, extrusionDepth: 2)
+    let material = SCNMaterial()
+    material.diffuse.contents = UIColor.magenta
+    scntext.materials = [material]
+    
+    
+    
+    //node.geometry = this scntext return value
+    return scntext
+}

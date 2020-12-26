@@ -16,9 +16,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     var newReferenceImages:Set<ARReferenceImage> = Set<ARReferenceImage>()
     
     var idOfZone: String?
-    
-    var popupPosition: SCNVector3?
-    var popupRotation: SCNVector4?
+ 
     
     var imgRefURL: URL?
     var imgAssURL: URL?
@@ -110,7 +108,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
                                  height: referenceImage.physicalSize.height)
             let planeNode = SCNNode(geometry: plane)
             planeNode.opacity = 1
-        
+            
 
             let material = SCNMaterial()
             material.diffuse.contents = self.assetsToPopUp
@@ -138,7 +136,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         //Run when image detected
     }
-    
+    //MARK: - Func
     
     func loadImageFrom(url: URL, completionHandler:@escaping(UIImage)->()) {
         DispatchQueue.global().async { [weak self] in
@@ -157,12 +155,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     public func resetTracking() {
         
         
-        
+        print("reset tracking")
         //only load 1 image
-        loadImageFrom(url: downloaded[0].references!) { (image) in
+        for download in downloaded {
+        loadImageFrom(url: download.references!) { (image) in
             
             let arRefImage = ARReferenceImage(image.cgImage!, orientation: .up, physicalWidth: 0.5)
-            arRefImage.name = "refer"
+            arRefImage.name = download.objectIdentifier
             self.newReferenceImages.insert(arRefImage)
             print(self.newReferenceImages)
             
@@ -174,24 +173,17 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             
             configuration.detectionImages = self.newReferenceImages
             configuration.automaticImageScaleEstimationEnabled = true
-            configuration.maximumNumberOfTrackedImages = 1
+            configuration.maximumNumberOfTrackedImages = 3
             configuration.environmentTexturing = .automatic
             configuration.frameSemantics.insert(.personSegmentationWithDepth)
+        
             self.sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
         }
         
+        }
         loadImageFrom(url: downloaded[0].assets!) { (image) in
             self.assetsToPopUp = image
         }
-        
-        
-        
-        //image always nil
-        
-        //convert to arreferenceimage
-        //newrefrenceimage.insert
-        
-        
     }
     
     

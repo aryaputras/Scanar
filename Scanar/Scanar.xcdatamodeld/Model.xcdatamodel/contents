@@ -2,12 +2,13 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B50" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Downloaded" representedClassName="Downloaded" syncable="YES">
         <attribute name="assets" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName"/>
+        <attribute name="objectIdentifier" optional="YES" attributeType="String"/>
         <attribute name="position" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
         <attribute name="references" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName"/>
         <attribute name="rotation" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
         <attribute name="zoneID" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Downloaded" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Downloaded" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

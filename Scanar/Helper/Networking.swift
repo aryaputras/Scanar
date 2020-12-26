@@ -16,19 +16,14 @@ func uploadNewZone(zoneID: String, references: URL, zoneName: String, assets: UR
     //config
     let database = CKContainer.default().publicCloudDatabase
     let newRecord = CKRecord(recordType: "zone")
-    
     //Setup assets
     var ref: CKAsset
     var ass: CKAsset
-    
-    
-   
-        let refURL = CKAsset(fileURL: references.absoluteURL)
-        ref = refURL
-    
-  
-        let assetURL = CKAsset(fileURL: assets.absoluteURL)
-        ass = assetURL
+    let refURL = CKAsset(fileURL: references.absoluteURL)
+    ref = refURL
+    let assetURL = CKAsset(fileURL: assets.absoluteURL)
+    ass = assetURL
+    let objectIdentifier = UUID().uuidString
     
     
     //Things to write
@@ -38,6 +33,7 @@ func uploadNewZone(zoneID: String, references: URL, zoneName: String, assets: UR
     let assRecordValue = ass as CKRecordValue
     let positionRecordValue = position as CKRecordValue
     let rotationRecordValue = rotation as CKRecordValue
+    let oidRecordValue = objectIdentifier as CKRecordValue
     
     
     //set value
@@ -47,6 +43,7 @@ func uploadNewZone(zoneID: String, references: URL, zoneName: String, assets: UR
     newRecord.setValue(assRecordValue, forKey: "assets")
     newRecord.setValue(position, forKey: "position")
     newRecord.setValue(rotation, forKey: "rotation")
+    newRecord.setObject(oidRecordValue, forKey: "objectIdentifier")
     //SETVALUE ASSETS
     
     //operation

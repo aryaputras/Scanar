@@ -24,6 +24,10 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var zoneIDLabel: UILabel!
     
     @IBOutlet weak var textfield: UITextField!
+    
+    
+    
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeHideKeyboard()
@@ -55,19 +59,22 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         /// Do any additional setup after loading the view.
     }
     
-
+//MARK: - Buttons
+    
+    
 
     @IBAction func joinClicked(_ sender: Any) {
         //ifzoneavailable == true = zone not exist
         
         joinZone(zoneID: zoneIDPassed ?? "")
-        
-        
-       
-        
-        
-        
+
     }
+    
+    
+    
+    
+    
+    
     
     //MARK: - Join functions
     func joinZone(zoneID: String){
@@ -83,6 +90,8 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         database.perform(query, inZoneWith: nil) { (records, error) in
             if let fetchedRecords = records {
                 
+                //for record in records, set satu satu
+                
                 var referenceAssets = fetchedRecords.first?.object(forKey: "references") as! CKAsset
                 var popupAssets = fetchedRecords.first?.object(forKey: "assets") as! CKAsset
                 
@@ -95,14 +104,19 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                     
                     fetchedRecords[0].object(forKey: "zoneID") as! String
                 
-               
+                var objectIdentifier = fetchedRecords.first?.object(forKey: "objectIdentifier") as! String
+                
                 //assets belum di download
                 let downloadedAssetsURLs = self.downloadFiles(ref: referenceAssets, zoneID: zoneIDString, ass: popupAssets)
                 ref = downloadedAssetsURLs.ref
                 ass = downloadedAssetsURLs.ass
-                self.saveUrlToCoreData(refURL: downloadedAssetsURLs.ref, assURL: downloadedAssetsURLs.ass, zoneID: zoneIDString, position: position, rotation: rotatation)
+                
+                
+                
+                self.saveUrlToCoreData(refURL: downloadedAssetsURLs.ref, assURL: downloadedAssetsURLs.ass, zoneID: zoneIDString, position: position, rotation: rotatation, oid: objectIdentifier)
                 
             
+                
                 print("Join zone succesful")
                 
                 //Check di core data ada atau tidak filenya, kalo tidak baru query&download. kalo sudah ada langsung ambil dari local dir
@@ -112,10 +126,15 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                 print("Failed to join zone with error: ", error!)
             }
         }
-
     }
     
-    func saveUrlToCoreData(refURL: URL, assURL: URL, zoneID: String, position: [Double], rotation: [Double]){
+    
+    
+    
+    
+    
+    
+    func saveUrlToCoreData(refURL: URL, assURL: URL, zoneID: String, position: [Double], rotation: [Double], oid: String){
         
        
         //Save url after downloading files to core data
@@ -144,6 +163,8 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         object.setValue(zoneID, forKey: "zoneID")
         object.setValue(position, forKey: "position")
         object.setValue(rotation, forKey: "rotation")
+        object.setValue(oid, forKey: "objectIdentifier")
+        
         
         print(refURL)
         print(assURL)
@@ -156,6 +177,14 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
           print("Could not save. \(error), \(error.userInfo)")
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     func downloadFiles(ref: CKAsset, zoneID: String, ass: CKAsset) -> (ref: URL, ass: URL){
         
@@ -175,7 +204,6 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                 print(error.localizedDescription);
             }
         }
-        
         
         
         //2. Looping dan masukin asset ke path satu satu
