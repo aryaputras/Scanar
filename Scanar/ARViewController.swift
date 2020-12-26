@@ -16,59 +16,54 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     var newReferenceImages:Set<ARReferenceImage> = Set<ARReferenceImage>()
     
     var idOfZone: String?
+    
+    var popupPosition: SCNVector3?
+    var popupRotation: SCNVector4?
+    
+    var imgRefURL: URL?
+    var imgAssURL: URL?
     /// A serial queue for thread safety when modifying the SceneKit node graph.
     var downloaded: [Downloaded] = []
-    var assetsToPopUp: [UIImage] = []
+    var assetsToPopUp: UIImage?
     let updateQueue = DispatchQueue(label: Bundle.main.bundleIdentifier! +
-        ".serialSceneKitQueue")
+                                        ".serialSceneKitQueue")
     @IBOutlet var sceneView: ARSCNView!
     
     
     //MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         guard let appDelegate =
-          UIApplication.shared.delegate as? AppDelegate else {
+                UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        
         let managedContext =
-          appDelegate.persistentContainer.viewContext
-        
+            appDelegate.persistentContainer.viewContext
         //2
         let fetchRequest =
             NSFetchRequest<Downloaded>(entityName: "Downloaded")
         fetchRequest.predicate = NSPredicate(format: "zoneID == %@", idOfZone!)
-        
         //3
         do {
+            downloaded = try managedContext.fetch(fetchRequest) as [Downloaded]
             
-          downloaded = try managedContext.fetch(fetchRequest) as [Downloaded]
-            
-            
-            
-        
         } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
+            print("Could not fetch. \(error), \(error.userInfo)")
         }
-
         // Set the view's delegate
         sceneView.delegate = self
         
-        // Show statistics such as fps and timing information
-
         
+        // Show statistics such as fps and timing information
+       
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
         // Set the scene to the view
         sceneView.scene = scene
         
+        //        print(imgRefURL, imgAssURL)
         
-        
-       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,10 +73,19 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         UIApplication.shared.isIdleTimerDisabled = true
         
         // Start the AR experience
-      //  resetTracking()
         
-       
-        setupAR(refURL: downloaded[0].references, assURL: downloaded[0].assets!)
+        ///load ref image
+        
+        
+        
+        print("viewdidappear")
+        
+        
+        resetTracking()
+        
+        
+        
+        //        setupAR(refURL: downloaded[0].references, assURL: downloaded[0].assets!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,7 +95,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     //MARK: - Buttons
-
+    
     
     
     //MARK: - Image detection
@@ -99,33 +103,39 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         let referenceImage = imageAnchor.referenceImage
-        updateQueue.async {
+        updateQueue.async { [self] in
             
             // Create a plane to visualize the initial position of the detected image.
             let plane = SCNPlane(width: referenceImage.physicalSize.width,
                                  height: referenceImage.physicalSize.height)
             let planeNode = SCNNode(geometry: plane)
             planeNode.opacity = 1
-            
-          
-            
-            //HOWWWWWWW THE FUUUUUUCCKKK WE ANCHOR THIS POSITION JUST LIKE THE USER WANTS/???????????
-            planeNode.position = SCNVector3(0.1, 0, 0.1)
-            
-            planeNode.rotation = SCNVector4(0.1, 0.1, 0.1, 0.1)
-         
+        
+
             let material = SCNMaterial()
-            material.diffuse.contents = self.assetsToPopUp[0]
-            
-            
+            material.diffuse.contents = self.assetsToPopUp
+            material.isDoubleSided = true
             planeNode.geometry?.materials = [material]
+//
+            //HOWWWWWWW THE FUUUUUUCCKKK WE ANCHOR THIS POSITION JUST LIKE THE USER WANTS/???????????
+            planeNode.position = convertDoubleToV3(doubles: downloaded[0].position!)
+            
+            
+            planeNode.rotation = convertDoubleToV4(doubles: downloaded[0].rotation!)
+            
+            
+            
+            
+            
+            
+            
             
             planeNode.eulerAngles.x = -.pi / 2
-            planeNode.runAction(self.imageHighlightAction)
-           
+            
+            
             node.addChildNode(planeNode)
         }
-
+        
         //Run when image detected
     }
     
@@ -135,70 +145,60 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
-                        print("LOADED ASSET")
-                        completionHandler(image)
+                        print("LOADED ASSET");
+                        completionHandler(image);
                     }
                 }
             }
         }
     }
-    func setupAR(refURL: URL, assURL: URL) {
-        
-        //load reference image from local dir
     
-        loadImageFrom(url: url) { (result) in
-            
-            let arImage = ARReferenceImage(result.cgImage!, orientation: CGImagePropertyOrientation.up, physicalWidth: 0.5)
-           
-            arImage.name = "reference"
-            
-            self.newReferenceImages.insert(arImage)
-            print("setup done")
-            self.resetTracking()
-        }
-        
-        
-        
-        for url in assURL {
-            loadImageFrom(url: url) { (result) in
-                
-               
-               
-               
-                
-                self.assetsToPopUp.append(result)
-                
-                self.resetTracking()
-            }
-        }
-        
-        
-    }
     
     public func resetTracking() {
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.detectionImages = newReferenceImages
-        configuration.automaticImageScaleEstimationEnabled = true
-        configuration.maximumNumberOfTrackedImages = 1
-        configuration.environmentTexturing = .automatic
-        configuration.frameSemantics.insert(.personSegmentationWithDepth)
-        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-    }
-    var imageHighlightAction: SCNAction {
-        return .sequence([
-            .wait(duration: 0.25),
-            .fadeOpacity(to: 0.85, duration: 0.25),
-            .fadeOpacity(to: 0.15, duration: 0.25),
-            .fadeOpacity(to: 0.85, duration: 0.25),
-           
         
-        ])
+        
+        
+        //only load 1 image
+        loadImageFrom(url: downloaded[0].references!) { (image) in
+            
+            let arRefImage = ARReferenceImage(image.cgImage!, orientation: .up, physicalWidth: 0.5)
+            arRefImage.name = "refer"
+            self.newReferenceImages.insert(arRefImage)
+            print(self.newReferenceImages)
+            
+            
+            
+            
+            
+            let configuration = ARWorldTrackingConfiguration()
+            
+            configuration.detectionImages = self.newReferenceImages
+            configuration.automaticImageScaleEstimationEnabled = true
+            configuration.maximumNumberOfTrackedImages = 1
+            configuration.environmentTexturing = .automatic
+            configuration.frameSemantics.insert(.personSegmentationWithDepth)
+            self.sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        }
+        
+        loadImageFrom(url: downloaded[0].assets!) { (image) in
+            self.assetsToPopUp = image
+        }
+        
+        
+        
+        //image always nil
+        
+        //convert to arreferenceimage
+        //newrefrenceimage.insert
+        
+        
     }
-
+    
+    
     // MARK: - Error handling
     
     
-
+    
     
     
     

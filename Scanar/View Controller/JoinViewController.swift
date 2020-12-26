@@ -18,6 +18,8 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
     var downloaded: [Downloaded] = []
 
     var zoneIDPassed: String?
+    var imgRefURL: URL?
+    var imgAssURL: URL?
   
     @IBOutlet weak var zoneIDLabel: UILabel!
     
@@ -60,6 +62,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         
         joinZone(zoneID: zoneIDPassed ?? "")
         
+        
        
         
         
@@ -69,6 +72,8 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
     //MARK: - Join functions
     func joinZone(zoneID: String){
         //init jvc
+        var ref: URL!
+        var ass: URL!
         
         //Query zone
         let database = CKContainer.default().publicCloudDatabase
@@ -78,8 +83,11 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         database.perform(query, inZoneWith: nil) { (records, error) in
             if let fetchedRecords = records {
                 
-                var referenceAssets = fetchedRecords[0].object(forKey: "references") as! [CKAsset]
-                var popupAssets = fetchedRecords[0].object(forKey: "assets") as! [CKAsset]
+                var referenceAssets = fetchedRecords.first?.object(forKey: "references") as! CKAsset
+                var popupAssets = fetchedRecords.first?.object(forKey: "assets") as! CKAsset
+                
+                var position = fetchedRecords.first?.object(forKey: "position") as! [Double]
+                var rotatation = fetchedRecords.first?.object(forKey: "rotation") as! [Double]
                 
                 var zoneIDString =
                     
@@ -90,10 +98,11 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                
                 //assets belum di download
                 let downloadedAssetsURLs = self.downloadFiles(ref: referenceAssets, zoneID: zoneIDString, ass: popupAssets)
+                ref = downloadedAssetsURLs.ref
+                ass = downloadedAssetsURLs.ass
+                self.saveUrlToCoreData(refURL: downloadedAssetsURLs.ref, assURL: downloadedAssetsURLs.ass, zoneID: zoneIDString, position: position, rotation: rotatation)
                 
-                self.saveUrlToCoreData(refURL: downloadedAssetsURLs.ref, assURL: downloadedAssetsURLs.ass, zoneID: zoneIDString)
-                
-                //
+            
                 print("Join zone succesful")
                 
                 //Check di core data ada atau tidak filenya, kalo tidak baru query&download. kalo sudah ada langsung ambil dari local dir
@@ -103,9 +112,10 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                 print("Failed to join zone with error: ", error!)
             }
         }
-        
+
     }
-    func saveUrlToCoreData(refURL: [URL], assURL: [URL], zoneID: String){
+    
+    func saveUrlToCoreData(refURL: URL, assURL: URL, zoneID: String, position: [Double], rotation: [Double]){
         
        
         //Save url after downloading files to core data
@@ -132,6 +142,9 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         object.setValue(refURL, forKeyPath: "references")
         object.setValue(assURL, forKey: "assets")
         object.setValue(zoneID, forKey: "zoneID")
+        object.setValue(position, forKey: "position")
+        object.setValue(rotation, forKey: "rotation")
+        
         print(refURL)
         print(assURL)
         // 4
@@ -144,11 +157,11 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func downloadFiles(ref: [CKAsset], zoneID: String, ass: [CKAsset]) -> (ref: [URL], ass: [URL]){
+    func downloadFiles(ref: CKAsset, zoneID: String, ass: CKAsset) -> (ref: URL, ass: URL){
         
         //Dummy return
-        var refURL: [URL] = []
-        var assURL: [URL] = []
+        var refURL: URL!
+        var assURL: URL!
         //1. Bikin folder
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
@@ -168,9 +181,9 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         //2. Looping dan masukin asset ke path satu satu
         
             ///downloading image reference
-        for asset in ref {
+        
             do {
-                let imageData = try Data(contentsOf: (asset.fileURL!))
+                let imageData = try Data(contentsOf: (ref.fileURL!))
                 
                 //KALO FILE = image save as.png
                 let destinationPath = NSURL(fileURLWithPath: dataPath.absoluteString).appendingPathComponent("reference-\(GenerateUniqueFileSuffix()).png", isDirectory: false)
@@ -181,35 +194,36 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                 let resources = try destinationPath?.resourceValues(forKeys:[.fileSizeKey])
                 let fileSize = resources?.fileSize!
                 //append to [URL]
-                refURL.append(destinationPath!)
+                refURL = (destinationPath!)
                     print ("\(fileSize)")
-                
+                imgRefURL = (destinationPath!)
                
             } catch {
                 print(error.localizedDescription)
             }
-        }
+        
         
         
         ///downlloading assets belum
-        for asset in ass {
+       
             do {
-                let imageData = try Data(contentsOf: (asset.fileURL!))
+                let imageData2 = try Data(contentsOf: (ass.fileURL!))
                 //KALO FILE = image save as.png
-                let destinationPath = NSURL(fileURLWithPath: dataPath.absoluteString).appendingPathComponent("assets-\(GenerateUniqueFileSuffix()).png", isDirectory: false)
+                let destinationPath2 = NSURL(fileURLWithPath: dataPath.absoluteString).appendingPathComponent("assets-\(GenerateUniqueFileSuffix()).png", isDirectory: false)
                 
-                FileManager.default.createFile(atPath: destinationPath!.path, contents:imageData, attributes:nil)
+                FileManager.default.createFile(atPath: destinationPath2!.path, contents:imageData2, attributes:nil)
                 print("download assets succesful")
                 //print file size
-                let resources = try destinationPath?.resourceValues(forKeys:[.fileSizeKey])
+                let resources = try destinationPath2?.resourceValues(forKeys:[.fileSizeKey])
                 let fileSize = resources?.fileSize!
                     print ("\(fileSize)")
                 
-                assURL.append(destinationPath!)
+                assURL = (destinationPath2!)
+                imgAssURL = (destinationPath2!)
             } catch {
                 print(error.localizedDescription)
             }
-        }
+        
 
        
      return (refURL, assURL)
@@ -249,6 +263,8 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         if let vc = segue.destination as? ARViewController,
             segue.identifier == "goToAR" {
             vc.idOfZone = zoneIDPassed
+            vc.imgAssURL = imgAssURL
+            vc.imgRefURL = imgRefURL
             print(zoneIDPassed)
            
         }

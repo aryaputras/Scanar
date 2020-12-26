@@ -12,24 +12,24 @@ import CloudKit
 
 //MARK: - Save
 
-func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: [URL], position: [Double], rotation: [Double] ){
+func uploadNewZone(zoneID: String, references: URL, zoneName: String, assets: URL, position: [Double], rotation: [Double] ){
     //config
     let database = CKContainer.default().publicCloudDatabase
     let newRecord = CKRecord(recordType: "zone")
     
     //Setup assets
-    var ref = [CKAsset]()
-    var ass = [CKAsset]()
+    var ref: CKAsset
+    var ass: CKAsset
     
     
-    for asset in references{
-        let assetURL = CKAsset(fileURL: asset.absoluteURL)
-        ref.append(assetURL)
-    }
-    for asset in assets{
-        let assetURL = CKAsset(fileURL: asset.absoluteURL)
-        ass.append(assetURL)
-    }
+   
+        let refURL = CKAsset(fileURL: references.absoluteURL)
+        ref = refURL
+    
+  
+        let assetURL = CKAsset(fileURL: assets.absoluteURL)
+        ass = assetURL
+    
     
     //Things to write
     let zoneIDRecordValue = zoneID as CKRecordValue
@@ -46,7 +46,7 @@ func uploadNewZone(zoneID: String, references: [URL], zoneName: String, assets: 
     newRecord.setValue(refRecordValue, forKey: "references")
     newRecord.setValue(assRecordValue, forKey: "assets")
     newRecord.setValue(position, forKey: "position")
-    newRecord.setValue(position, forKey: "rotation")
+    newRecord.setValue(rotation, forKey: "rotation")
     //SETVALUE ASSETS
     
     //operation

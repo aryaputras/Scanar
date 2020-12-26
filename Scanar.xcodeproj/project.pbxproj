@@ -123,7 +123,6 @@
 				C03000A62589F86900EF5EA6 /* Helper */,
 				C0FA84002589F69300BC998D /* View Controller */,
 				C003CF732588FF3100898752 /* Assets.xcassets */,
-				C02DC6D4258CE44D00E6D2F2 /* Scanner */,
 				C0CD6B00258BB54300291E9E /* MainStoryboard.storyboard */,
 				C003CF6E2588FF2F00898752 /* ARViewController.swift */,
 				C0634CC6258BC702006661BF /* Scanar.xcdatamodeld */,
@@ -139,13 +138,6 @@
 				C003CF85258903DF00898752 /* CloudKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C02DC6D4258CE44D00E6D2F2 /* Scanner */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Scanner;
 			sourceTree = "<group>";
 		};
 		C03000A62589F86900EF5EA6 /* Helper */ = {

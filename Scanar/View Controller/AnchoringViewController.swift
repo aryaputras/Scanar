@@ -172,16 +172,16 @@ var refImage: UIImage?
         let convertedRot = convertV4ToDouble(vector: savedRotation!)
         
         
-        var imageRefURL: [URL] = [URL]()
-        var assetsURL: [URL] = [URL]()
+        var imageRefURL: URL
+        var assetsURL: URL
         zoneID = GenerateUniqueCode()
         //just save 1 image
         
         
-        imageRefURL.append(imageToURL(image: refImage!))
+        imageRefURL = imageToURL(image: refImage!)
         
         //assetsURL is fake
-        assetsURL.append(imageToURL(image: assetImage!))
+        assetsURL = imageToURL(image: assetImage!)
         //Remove force unwrap and give UI warning if field is empty
         
         if isZoneAvailable(zoneIDToCheck: zoneID!) == true {
