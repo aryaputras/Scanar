@@ -34,6 +34,9 @@
 		C0634CD4258BC98B006661BF /* Downloaded+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0634CD2258BC98B006661BF /* Downloaded+CoreDataClass.swift */; };
 		C0634CD5258BC98B006661BF /* Downloaded+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0634CD3258BC98B006661BF /* Downloaded+CoreDataProperties.swift */; };
 		C06B315B258BB73700C2AC63 /* MainStoryboard.storyboard in CopyFiles */ = {isa = PBXBuildFile; fileRef = C0CD6B00258BB54300291E9E /* MainStoryboard.storyboard */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		C08F4C9F259817D000E60EEA /* AddObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08F4C9E259817D000E60EEA /* AddObjectViewController.swift */; };
+		C08F4CA625981E3F00E60EEA /* AddObjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08F4CA425981E3F00E60EEA /* AddObjectCollectionViewCell.swift */; };
+		C0F464EC259824F100E188FA /* AddObjectCollectionViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = C08F4CA525981E3F00E60EEA /* AddObjectCollectionViewCell.xib */; };
 		C0F877A32589F04000E5C075 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F877A22589F04000E5C075 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +81,9 @@
 		C0634CC7258BC702006661BF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		C0634CD2258BC98B006661BF /* Downloaded+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Downloaded+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C0634CD3258BC98B006661BF /* Downloaded+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Downloaded+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C08F4C9E259817D000E60EEA /* AddObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddObjectViewController.swift; sourceTree = "<group>"; };
+		C08F4CA425981E3F00E60EEA /* AddObjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddObjectCollectionViewCell.swift; path = "Scanar/View Controller/Add Object/AddObjectCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
+		C08F4CA525981E3F00E60EEA /* AddObjectCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddObjectCollectionViewCell.xib; path = /Users/aryaputraspro/Documents/Scanar/Scanar/AddObjectCollectionViewCell.xib; sourceTree = "<absolute>"; };
 		C0CD6B00258BB54300291E9E /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = /Users/aryaputraspro/Documents/Scanar/Scanar/MainStoryboard.storyboard; sourceTree = "<absolute>"; };
 		C0F877A22589F04000E5C075 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +157,16 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		C08F4CA325981E1700E60EEA /* Add Object */ = {
+			isa = PBXGroup;
+			children = (
+				C08F4C9E259817D000E60EEA /* AddObjectViewController.swift */,
+				C08F4CA425981E3F00E60EEA /* AddObjectCollectionViewCell.swift */,
+				C08F4CA525981E3F00E60EEA /* AddObjectCollectionViewCell.xib */,
+			);
+			path = "Add Object";
+			sourceTree = "<group>";
+		};
 		C0FA84002589F69300BC998D /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +177,7 @@
 				C02DC6EA258CE57900E6D2F2 /* HomeViewController.swift */,
 				C003CF872589063700898752 /* QRScanViewController.swift */,
 				C03000AF258AF68800EF5EA6 /* JoinViewController.swift */,
+				C08F4CA325981E1700E60EEA /* Add Object */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -233,7 +250,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0F464EC259824F100E188FA /* AddObjectCollectionViewCell.xib in Sources */,
 				C0634C5E258BBA26006661BF /* LaunchScreenStoryboard.storyboard in Sources */,
+				C08F4CA625981E3F00E60EEA /* AddObjectCollectionViewCell.swift in Sources */,
 				C04942F2258BB9330085EBC8 /* Scanar.entitlements in Sources */,
 				C04942F0258BB92E0085EBC8 /* art.scnassets in Sources */,
 				C04942EE258BB9290085EBC8 /* Assets.xcassets in Sources */,
@@ -248,6 +267,7 @@
 				C003CF882589063700898752 /* QRScanViewController.swift in Sources */,
 				C003CF8C258983DA00898752 /* Networking.swift in Sources */,
 				C003CF6F2588FF2F00898752 /* ARViewController.swift in Sources */,
+				C08F4C9F259817D000E60EEA /* AddObjectViewController.swift in Sources */,
 				C03000A42589F83000EF5EA6 /* SuccesViewController.swift in Sources */,
 				C003CF992589D09300898752 /* FileManager.swift in Sources */,
 				C0F877A32589F04000E5C075 /* ImagePicker.swift in Sources */,

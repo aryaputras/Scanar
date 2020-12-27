@@ -90,37 +90,28 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         database.perform(query, inZoneWith: nil) { (records, error) in
             if let fetchedRecords = records {
                 
+                for record in fetchedRecords {
                 //for record in records, set satu satu
                 
-                var referenceAssets = fetchedRecords.first?.object(forKey: "references") as! CKAsset
-                var popupAssets = fetchedRecords.first?.object(forKey: "assets") as! CKAsset
+                    let referenceAssets = record.object(forKey: "references") as! CKAsset
+                    let popupAssets = record.object(forKey: "assets") as! CKAsset
                 
-                var position = fetchedRecords.first?.object(forKey: "position") as! [Double]
-                var rotatation = fetchedRecords.first?.object(forKey: "rotation") as! [Double]
+                    let position = record.object(forKey: "position") as! [Double]
+                    let rotatation = record.object(forKey: "rotation") as! [Double]
                 
-                var zoneIDString =
-                    
-                    
-                    
-                    fetchedRecords[0].object(forKey: "zoneID") as! String
+                    let zoneIDString = record.object(forKey: "zoneID") as! String
                 
-                var objectIdentifier = fetchedRecords.first?.object(forKey: "objectIdentifier") as! String
-                
+                    let objectIdentifier = record.object(forKey: "objectIdentifier") as! String
                 //assets belum di download
                 let downloadedAssetsURLs = self.downloadFiles(ref: referenceAssets, zoneID: zoneIDString, ass: popupAssets)
                 ref = downloadedAssetsURLs.ref
                 ass = downloadedAssetsURLs.ass
-                
-                
-                
-                self.saveUrlToCoreData(refURL: downloadedAssetsURLs.ref, assURL: downloadedAssetsURLs.ass, zoneID: zoneIDString, position: position, rotation: rotatation, oid: objectIdentifier)
-                
-            
-                
+               
+           
+                self.saveUrlToCoreData(refURL: ref, assURL: ass, zoneID: zoneIDString, position: position, rotation: rotatation, oid: objectIdentifier)
+  
                 print("Join zone succesful")
-                
-                //Check di core data ada atau tidak filenya, kalo tidak baru query&download. kalo sudah ada langsung ambil dari local dir
-                
+                }
                 
             } else {
                 print("Failed to join zone with error: ", error!)
@@ -166,8 +157,6 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         object.setValue(oid, forKey: "objectIdentifier")
         
         
-        print(refURL)
-        print(assURL)
         // 4
         do {
           try managedContext.save()
@@ -223,7 +212,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                 let fileSize = resources?.fileSize!
                 //append to [URL]
                 refURL = (destinationPath!)
-                    print ("\(fileSize)")
+                   
                 imgRefURL = (destinationPath!)
                
             } catch {
@@ -244,7 +233,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                 //print file size
                 let resources = try destinationPath2?.resourceValues(forKeys:[.fileSizeKey])
                 let fileSize = resources?.fileSize!
-                    print ("\(fileSize)")
+                   
                 
                 assURL = (destinationPath2!)
                 imgAssURL = (destinationPath2!)
@@ -293,7 +282,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
             vc.idOfZone = zoneIDPassed
             vc.imgAssURL = imgAssURL
             vc.imgRefURL = imgRefURL
-            print(zoneIDPassed)
+           
            
         }
         

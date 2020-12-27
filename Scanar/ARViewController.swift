@@ -16,13 +16,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     var newReferenceImages:Set<ARReferenceImage> = Set<ARReferenceImage>()
     
     var idOfZone: String?
- 
+    
     
     var imgRefURL: URL?
     var imgAssURL: URL?
     /// A serial queue for thread safety when modifying the SceneKit node graph.
     var downloaded: [Downloaded] = []
-    var assetsToPopUp: UIImage?
+    var assetsToPopUp: [UIImage]?
     let updateQueue = DispatchQueue(label: Bundle.main.bundleIdentifier! +
                                         ".serialSceneKitQueue")
     @IBOutlet var sceneView: ARSCNView!
@@ -53,7 +53,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         
         // Show statistics such as fps and timing information
-       
+        
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
@@ -81,9 +81,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         resetTracking()
         
+        print(downloaded)
         
-        
-        //        setupAR(refURL: downloaded[0].references, assURL: downloaded[0].assets!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,35 +102,41 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         let referenceImage = imageAnchor.referenceImage
         updateQueue.async { [self] in
             
+            
+            let filteredDownload = downloaded.filter { (item) -> Bool in
+                return item.objectIdentifier == referenceImage.name
+            }
+            
+            
+            loadImageFrom(url: filteredDownload[0].assets!) { (image) in
+           
+                
+            
+            
             // Create a plane to visualize the initial position of the detected image.
             let plane = SCNPlane(width: referenceImage.physicalSize.width,
                                  height: referenceImage.physicalSize.height)
             let planeNode = SCNNode(geometry: plane)
             planeNode.opacity = 1
             
-
+            
             let material = SCNMaterial()
-            material.diffuse.contents = self.assetsToPopUp
+            material.diffuse.contents = image
             material.isDoubleSided = true
             planeNode.geometry?.materials = [material]
-//
+            
+            //
             //HOWWWWWWW THE FUUUUUUCCKKK WE ANCHOR THIS POSITION JUST LIKE THE USER WANTS/???????????
-            planeNode.position = convertDoubleToV3(doubles: downloaded[0].position!)
+            planeNode.position = convertDoubleToV3(doubles: filteredDownload[0].position!)
             
             
-            planeNode.rotation = convertDoubleToV4(doubles: downloaded[0].rotation!)
-            
-            
-            
-            
-            
-            
-            
+            planeNode.rotation = convertDoubleToV4(doubles: filteredDownload[0].rotation!)
             
             planeNode.eulerAngles.x = -.pi / 2
             
             
             node.addChildNode(planeNode)
+            }
         }
         
         //Run when image detected
@@ -158,31 +163,33 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         print("reset tracking")
         //only load 1 image
         for download in downloaded {
-        loadImageFrom(url: download.references!) { (image) in
+            loadImageFrom(url: download.references!) { (image) in
+                
+                let arRefImage = ARReferenceImage(image.cgImage!, orientation: .up, physicalWidth: 0.5)
+                arRefImage.name = download.objectIdentifier
+                self.newReferenceImages.insert(arRefImage)
+               
+                
+                print("fired")
+                
+                
+                
+                let configuration = ARWorldTrackingConfiguration()
+                
+                configuration.detectionImages = self.newReferenceImages
+                configuration.automaticImageScaleEstimationEnabled = true
+                configuration.maximumNumberOfTrackedImages = 3
+                configuration.environmentTexturing = .automatic
+                configuration.frameSemantics.insert(.personSegmentationWithDepth)
+                
+                self.sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+            }
             
-            let arRefImage = ARReferenceImage(image.cgImage!, orientation: .up, physicalWidth: 0.5)
-            arRefImage.name = download.objectIdentifier
-            self.newReferenceImages.insert(arRefImage)
-            print(self.newReferenceImages)
             
             
-            
-            
-            
-            let configuration = ARWorldTrackingConfiguration()
-            
-            configuration.detectionImages = self.newReferenceImages
-            configuration.automaticImageScaleEstimationEnabled = true
-            configuration.maximumNumberOfTrackedImages = 3
-            configuration.environmentTexturing = .automatic
-            configuration.frameSemantics.insert(.personSegmentationWithDepth)
-        
-            self.sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-        }
-        
-        }
-        loadImageFrom(url: downloaded[0].assets!) { (image) in
-            self.assetsToPopUp = image
+//            loadImageFrom(url: download.assets!) { (image) in
+//                self.assetsToPopUp?.append(image)
+//            }
         }
     }
     
