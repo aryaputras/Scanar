@@ -9,14 +9,20 @@ import UIKit
 
 class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    var senderTag: Int?
+    var zoneID: String?
    
-    var choosenImage: UIImage?
+    
     @IBOutlet var imageView: UIImageView!
-       @IBOutlet var chooseBuuton: UIButton!
-
+    @IBOutlet var chooseBuuton: UIButton!
+    @IBOutlet weak var imageView2: UIImageView!
+    
+    var isRefSelected = false
+    var isAssSelected = false
+    
     var imagePicker: ImagePicker!
     
-
+    
     @IBOutlet weak var textfield: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,18 +33,25 @@ class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegat
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
+    //MARK: -Buttons
     
     @IBAction func btnClicked(_ sender: UIButton) {
-
+        self.senderTag = 0
+        print(sender.tag)
         self.imagePicker.present(from: sender)
-        }
-
-
-    
-    @IBAction func saveDidTap(_ sender: Any) {
     }
     
-//MARK: - Keyboard
+    @IBAction func btnClicked2(_ sender: UIButton) {
+        self.senderTag = 1
+        print(sender.tag)
+        self.imagePicker.present(from: sender)
+    }
+    
+    
+    
+    @IBAction func anchorClicked(_ sender: Any) {
+    }
+    //MARK: - Keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -56,27 +69,46 @@ class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegat
         //In short- Dismiss the active keyboard.
         view.endEditing(true)
     }
- 
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addRefToAsset" {
-            let vc = segue.destination as! ChoosePopupViewController
-            vc.refImage = choosenImage
-            vc.zoneName = textfield.text!
-         
+        if segue.identifier == "objectToAnchor" {
+            
+            let vc = segue.destination as! AnchoringViewController
+            vc.zoneID = zoneID
+            vc.zoneName = textfield.text
+            vc.refImage = imageView.image
+            vc.assetImage = imageView2.image
+
+            
+            
+            
             
             
         }
         
         
     }
+    
+    
 }
 //MARK: - Extensions
 extension AddNewZoneViewController: ImagePickerDelegate {
-
     func didSelect(image: UIImage?) {
-        self.imageView.image = image
-        self.choosenImage = image
+        
+               if self.senderTag == 0 {
+                   //TROPHY 1
+                   self.imageView.image = image
+                   self.isRefSelected = true
+               } else if self.senderTag == 1 {
+                   //TROPHY 2
+                   self.imageView2.image = image
+                   self.isAssSelected = true
+               }
     }
+    
+  
+ 
+
     
     
 }

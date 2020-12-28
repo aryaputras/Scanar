@@ -12,14 +12,13 @@ import ARKit
 class AnchoringViewController: UIViewController, ARSCNViewDelegate {
     
     ///Reveived images from segues
-var refImage: UIImage?
-    
-    var assetImage: UIImage?
     var savedPosition: SCNVector3?
     var savedRotation: SCNVector4?
-
-    var zoneName: String? = ""
-    var zoneID: String? = ""
+    
+    var zoneName: String! = ""
+    var zoneID: String! = ""
+    var refImage: UIImage!
+    var assetImage: UIImage!
     
     @IBOutlet var sceneView: ARSCNView!
     
@@ -71,7 +70,7 @@ var refImage: UIImage?
         // Set the scene to the view
         sceneView.scene = scene
         
-      
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +82,7 @@ var refImage: UIImage?
         var cgi = refImage?.cgImage
         print(cgi)
         
-
+        
         let ref = ARReferenceImage(cgi!, orientation: .up, physicalWidth: 0.5)
         ref.name = "hhh"
         
@@ -92,7 +91,7 @@ var refImage: UIImage?
         configuration.maximumNumberOfTrackedImages = 1
         configuration.environmentTexturing = .automatic
         configuration.frameSemantics.insert(.personSegmentationWithDepth)
-         //Run the view's session
+        //Run the view's session
         sceneView.session.run(configuration)
         
     }
@@ -190,7 +189,7 @@ var refImage: UIImage?
             
             
             //segue after all finished
-           
+            
         } else {
             print("Zone ID duplicate available ")
         }
@@ -210,7 +209,7 @@ var refImage: UIImage?
             let planeNode = SCNNode(geometry: plane)
             planeNode.opacity = 1
             
-        
+            
             let material = SCNMaterial()
             material.diffuse.contents = self.assetImage
             
@@ -219,10 +218,10 @@ var refImage: UIImage?
             
             planeNode.eulerAngles.x = -.pi / 2
             planeNode.name = "popup"
-           
+            
             node.addChildNode(planeNode)
         }
-
+        
         //Run when image detected
     }
     
@@ -241,12 +240,5 @@ var refImage: UIImage?
         
     }
     //MARK: - Prepare
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "anchorToFinish" {
-            let vc = segue.destination as! SuccesViewController
-            vc.zoneID = zoneID
-            
-            
-        }
-    }
+  
 }

@@ -19,7 +19,6 @@
 		C02DC6E6258CE49600E6D2F2 /* StyleTransferModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C02DC6E5258CE49600E6D2F2 /* StyleTransferModel.mlmodel */; };
 		C02DC6EB258CE57900E6D2F2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02DC6EA258CE57900E6D2F2 /* HomeViewController.swift */; };
 		C03000A42589F83000EF5EA6 /* SuccesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03000A32589F83000EF5EA6 /* SuccesViewController.swift */; };
-		C03000A9258A4E0A00EF5EA6 /* ChoosePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03000A8258A4E0A00EF5EA6 /* ChoosePopupViewController.swift */; };
 		C03000B0258AF68800EF5EA6 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03000AF258AF68800EF5EA6 /* JoinViewController.swift */; };
 		C04942E6258BB8C00085EBC8 /* Scanar.entitlements in CopyFiles */ = {isa = PBXBuildFile; fileRef = C003CF82258903DA00898752 /* Scanar.entitlements */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C04942E9258BB8C90085EBC8 /* Assets.xcassets in CopyFiles */ = {isa = PBXBuildFile; fileRef = C003CF732588FF3100898752 /* Assets.xcassets */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -27,6 +26,7 @@
 		C04942EE258BB9290085EBC8 /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = C003CF732588FF3100898752 /* Assets.xcassets */; };
 		C04942F0258BB92E0085EBC8 /* art.scnassets in Sources */ = {isa = PBXBuildFile; fileRef = C003CF6C2588FF2F00898752 /* art.scnassets */; };
 		C04942F2258BB9330085EBC8 /* Scanar.entitlements in Sources */ = {isa = PBXBuildFile; fileRef = C003CF82258903DA00898752 /* Scanar.entitlements */; };
+		C058F3602599C0F300F40A89 /* AddObjectViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058F35F2599C0F300F40A89 /* AddObjectViewController+UICollectionView.swift */; };
 		C0634C5A258BBA02006661BF /* LaunchScreenStoryboard.storyboard in CopyFiles */ = {isa = PBXBuildFile; fileRef = C003CF752588FF3100898752 /* LaunchScreenStoryboard.storyboard */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C0634C5E258BBA26006661BF /* LaunchScreenStoryboard.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = C003CF752588FF3100898752 /* LaunchScreenStoryboard.storyboard */; };
 		C0634CC8258BC702006661BF /* Scanar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C0634CC6258BC702006661BF /* Scanar.xcdatamodeld */; };
@@ -76,8 +76,8 @@
 		C02DC6E5258CE49600E6D2F2 /* StyleTransferModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = StyleTransferModel.mlmodel; sourceTree = "<group>"; };
 		C02DC6EA258CE57900E6D2F2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C03000A32589F83000EF5EA6 /* SuccesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccesViewController.swift; sourceTree = "<group>"; };
-		C03000A8258A4E0A00EF5EA6 /* ChoosePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePopupViewController.swift; sourceTree = "<group>"; };
 		C03000AF258AF68800EF5EA6 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		C058F35F2599C0F300F40A89 /* AddObjectViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddObjectViewController+UICollectionView.swift"; sourceTree = "<group>"; };
 		C0634CC7258BC702006661BF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		C0634CD2258BC98B006661BF /* Downloaded+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Downloaded+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C0634CD3258BC98B006661BF /* Downloaded+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Downloaded+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -161,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				C08F4C9E259817D000E60EEA /* AddObjectViewController.swift */,
+				C058F35F2599C0F300F40A89 /* AddObjectViewController+UICollectionView.swift */,
 				C08F4CA425981E3F00E60EEA /* AddObjectCollectionViewCell.swift */,
 				C08F4CA525981E3F00E60EEA /* AddObjectCollectionViewCell.xib */,
 			);
@@ -173,7 +174,6 @@
 				C03000A32589F83000EF5EA6 /* SuccesViewController.swift */,
 				C003CF9F2589E9AE00898752 /* AddNewZoneViewController.swift */,
 				C02D2CAC259311AB0004761B /* AnchoringViewController.swift */,
-				C03000A8258A4E0A00EF5EA6 /* ChoosePopupViewController.swift */,
 				C02DC6EA258CE57900E6D2F2 /* HomeViewController.swift */,
 				C003CF872589063700898752 /* QRScanViewController.swift */,
 				C03000AF258AF68800EF5EA6 /* JoinViewController.swift */,
@@ -259,10 +259,10 @@
 				C0634CD4258BC98B006661BF /* Downloaded+CoreDataClass.swift in Sources */,
 				C02D2CAD259311AB0004761B /* AnchoringViewController.swift in Sources */,
 				C04942EC258BB90E0085EBC8 /* MainStoryboard.storyboard in Sources */,
-				C03000A9258A4E0A00EF5EA6 /* ChoosePopupViewController.swift in Sources */,
 				C003CFA02589E9AE00898752 /* AddNewZoneViewController.swift in Sources */,
 				C02DC6EB258CE57900E6D2F2 /* HomeViewController.swift in Sources */,
 				C03000B0258AF68800EF5EA6 /* JoinViewController.swift in Sources */,
+				C058F3602599C0F300F40A89 /* AddObjectViewController+UICollectionView.swift in Sources */,
 				C0634CD5258BC98B006661BF /* Downloaded+CoreDataProperties.swift in Sources */,
 				C003CF882589063700898752 /* QRScanViewController.swift in Sources */,
 				C003CF8C258983DA00898752 /* Networking.swift in Sources */,
