@@ -54,8 +54,17 @@ class HomeViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         stopCamera()
     }
+    @IBAction func createClicked(_ sender: Any) {
+        performSegue(withIdentifier: "rootToCreate", sender: self)
+    }
 }
 
+
+
+
+
+
+//MARK: - Extension
 
 // AVCaptureVideoDataOutputSampleBufferDelegate protocol and related methods
 extension HomeViewController:  AVCaptureVideoDataOutputSampleBufferDelegate{

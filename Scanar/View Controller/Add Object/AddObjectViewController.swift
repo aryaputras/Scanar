@@ -24,10 +24,11 @@ import UIKit
 //MARK:- THIS VC IS FUCKED
 
 
+///reload data dong pas abis save anchor, jd pas balik ke awal langsung muncul lg cell yg baru di collectionview
 
 
 
-class AddObjectViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class AddObjectViewController: UIViewController {
     
     var numberOfItems: Int = 3
     
@@ -41,46 +42,30 @@ class AddObjectViewController: UIViewController, UICollectionViewDelegate, UICol
         self.addObjectCollectionView.dataSource = self
         
         self.addObjectCollectionView.register(AddObjectCollectionViewCell.nib(), forCellWithReuseIdentifier: "AddObjectCollectionViewCell")
-        
-        
+     
+      
         zoneIDLabel.text = GenerateRandom()
         
+        DataManager.shared.firstVC = self
     }
+
     
     
     //MARK: - Func
     
+
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfItems
-    }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
-        
-        let cell = addObjectCollectionView.dequeueReusableCell(withReuseIdentifier: "AddObjectCollectionViewCell", for: indexPath) as! AddObjectCollectionViewCell
-        
-        cell.frame.size = CGSize(width: 414, height: 172)
-       
-        cell.tag = indexPath.row
-        
-        //tap recog
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(cellTapped(sender:)))
-        tapRecognizer.numberOfTapsRequired = 1
-        cell.addGestureRecognizer(tapRecognizer)
-        
-        return cell
-    }
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+    
+    
+    
+    
     //MARK: - Button
     
     
     
     @IBAction func moreCellTapped(_ sender: Any) {
-        numberOfItems += 1
+        objectsData.append(NewObjectModel(refImage: nil, assImage: nil))
         addObjectCollectionView.reloadData()
     }
     
@@ -105,12 +90,11 @@ class AddObjectViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
+       //SEND ZONEID
+        if segue.identifier == "rootToAddZone" {
+            let vc = segue.destination as! AddNewZoneViewController
+            
+            vc.zoneID = zoneIDLabel.text
+        }
     }
-    
-    
-    
-
-    
-
 }

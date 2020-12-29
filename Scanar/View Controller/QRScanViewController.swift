@@ -2,12 +2,12 @@ import AVFoundation
 import UIKit
 
 protocol ChildToParentProtocol:class {
-
-
-       
-        func needToPassInfoToParent(with value:String)
-
-    }
+    
+    
+    
+    func needToPassInfoToParent(with value:String)
+    
+}
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     

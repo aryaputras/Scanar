@@ -27,6 +27,8 @@
 		C04942F0258BB92E0085EBC8 /* art.scnassets in Sources */ = {isa = PBXBuildFile; fileRef = C003CF6C2588FF2F00898752 /* art.scnassets */; };
 		C04942F2258BB9330085EBC8 /* Scanar.entitlements in Sources */ = {isa = PBXBuildFile; fileRef = C003CF82258903DA00898752 /* Scanar.entitlements */; };
 		C058F3602599C0F300F40A89 /* AddObjectViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058F35F2599C0F300F40A89 /* AddObjectViewController+UICollectionView.swift */; };
+		C058F3632599C26800F40A89 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058F3622599C26800F40A89 /* Model.swift */; };
+		C05EC2D3259ADB9000CEA398 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05EC2D2259ADB9000CEA398 /* DataManager.swift */; };
 		C0634C5A258BBA02006661BF /* LaunchScreenStoryboard.storyboard in CopyFiles */ = {isa = PBXBuildFile; fileRef = C003CF752588FF3100898752 /* LaunchScreenStoryboard.storyboard */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C0634C5E258BBA26006661BF /* LaunchScreenStoryboard.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = C003CF752588FF3100898752 /* LaunchScreenStoryboard.storyboard */; };
 		C0634CC8258BC702006661BF /* Scanar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C0634CC6258BC702006661BF /* Scanar.xcdatamodeld */; };
@@ -78,6 +80,8 @@
 		C03000A32589F83000EF5EA6 /* SuccesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccesViewController.swift; sourceTree = "<group>"; };
 		C03000AF258AF68800EF5EA6 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		C058F35F2599C0F300F40A89 /* AddObjectViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddObjectViewController+UICollectionView.swift"; sourceTree = "<group>"; };
+		C058F3622599C26800F40A89 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		C05EC2D2259ADB9000CEA398 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		C0634CC7258BC702006661BF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		C0634CD2258BC98B006661BF /* Downloaded+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Downloaded+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C0634CD3258BC98B006661BF /* Downloaded+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Downloaded+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 				C0FA84002589F69300BC998D /* View Controller */,
 				C003CF732588FF3100898752 /* Assets.xcassets */,
 				C0CD6B00258BB54300291E9E /* MainStoryboard.storyboard */,
+				C058F3652599C26C00F40A89 /* Model */,
 				C003CF6E2588FF2F00898752 /* ARViewController.swift */,
 				C0634CC6258BC702006661BF /* Scanar.xcdatamodeld */,
 				C003CF752588FF3100898752 /* LaunchScreenStoryboard.storyboard */,
@@ -152,9 +157,18 @@
 				C003CF7F2588FF9200898752 /* Helper.swift */,
 				C003CF8B258983DA00898752 /* Networking.swift */,
 				C003CF982589D09300898752 /* FileManager.swift */,
+				C05EC2D2259ADB9000CEA398 /* DataManager.swift */,
 				C0F877A22589F04000E5C075 /* ImagePicker.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		C058F3652599C26C00F40A89 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C058F3622599C26800F40A89 /* Model.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C08F4CA325981E1700E60EEA /* Add Object */ = {
@@ -269,11 +283,13 @@
 				C003CF6F2588FF2F00898752 /* ARViewController.swift in Sources */,
 				C08F4C9F259817D000E60EEA /* AddObjectViewController.swift in Sources */,
 				C03000A42589F83000EF5EA6 /* SuccesViewController.swift in Sources */,
+				C058F3632599C26800F40A89 /* Model.swift in Sources */,
 				C003CF992589D09300898752 /* FileManager.swift in Sources */,
 				C0F877A32589F04000E5C075 /* ImagePicker.swift in Sources */,
 				C003CF6B2588FF2F00898752 /* AppDelegate.swift in Sources */,
 				C02DC6E6258CE49600E6D2F2 /* StyleTransferModel.mlmodel in Sources */,
 				C0634CC8258BC702006661BF /* Scanar.xcdatamodeld in Sources */,
+				C05EC2D3259ADB9000CEA398 /* DataManager.swift in Sources */,
 				C003CF802588FF9200898752 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

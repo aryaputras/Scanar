@@ -19,7 +19,8 @@ class AnchoringViewController: UIViewController, ARSCNViewDelegate {
     var zoneID: String! = ""
     var refImage: UIImage!
     var assetImage: UIImage!
-    
+   
+    //change nil to addobjectvc?
     @IBOutlet var sceneView: ARSCNView!
     
     
@@ -57,7 +58,7 @@ class AnchoringViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -154,10 +155,10 @@ class AnchoringViewController: UIViewController, ARSCNViewDelegate {
     //save
     @IBAction func save(_ sender: Any) {
         saveAnchor()
-        
+       
         //Get value each axis by adding (.x)
     }
-    
+
     
     
     // MARK: - ARSCNViewDelegate
@@ -171,11 +172,12 @@ class AnchoringViewController: UIViewController, ARSCNViewDelegate {
         let convertedRot = convertV4ToDouble(vector: savedRotation!)
         
         
+        
         var imageRefURL: URL
         var assetsURL: URL
-        zoneID = GenerateUniqueCode()
         //just save 1 image
         
+        objectsData.append(NewObjectModel(refImage: refImage!, assImage: assetImage!))
         
         imageRefURL = imageToURL(image: refImage!)
         
@@ -183,15 +185,39 @@ class AnchoringViewController: UIViewController, ARSCNViewDelegate {
         assetsURL = imageToURL(image: assetImage!)
         //Remove force unwrap and give UI warning if field is empty
         
+        //Add to data model coba
+        
+        
+        
         if isZoneAvailable(zoneIDToCheck: zoneID!) == true {
             
             uploadNewZone(zoneID: zoneID!, references: imageRefURL, zoneName: zoneName!, assets: assetsURL, position: convertedPos, rotation: convertedRot)
             
             
             //segue after all finished
+           
+            
+            dismissAll()
             
         } else {
             print("Zone ID duplicate available ")
+        }
+    }
+    
+    func dismissAll(){
+        DataManager.shared.firstVC.addObjectCollectionView.reloadData()
+        
+//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+//           appDelegate.window?.rootViewController?.dismiss(animated: true, completion: nil)
+//           (appDelegate.window?.rootViewController as? UINavigationController)?.popToRootViewController(animated: true)
+//        }
+        
+        if let first = presentingViewController,
+           let second = first.presentingViewController{
+             first.view.isHidden = true
+             second.dismiss(animated: true)
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+
         }
     }
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -239,6 +265,11 @@ class AnchoringViewController: UIViewController, ARSCNViewDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
-    //MARK: - Prepare
-  
+
 }
+    //MARK: - Protocol
+    
+
+
+
+
