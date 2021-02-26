@@ -17,6 +17,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     
     var idOfZone: String?
     
+    var popUpAction: SCNAction {
+        return .group([
+            .fadeIn(duration: 1),
+            .scale(to: 1, duration: 1)
+        ])
+    }
+    
     
     var imgRefURL: URL?
     var imgAssURL: URL?
@@ -109,52 +116,42 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             
             
             loadImageFrom(url: filteredDownload[0].assets!) { (image) in
-           
                 
-            
-            
-            // Create a plane to visualize the initial position of the detected image.
-            let plane = SCNPlane(width: referenceImage.physicalSize.width,
-                                 height: referenceImage.physicalSize.height)
-            let planeNode = SCNNode(geometry: plane)
-            planeNode.opacity = 1
-            
-            
-            let material = SCNMaterial()
-            material.diffuse.contents = image
-            material.isDoubleSided = true
-            planeNode.geometry?.materials = [material]
-            
-            //
-            //HOWWWWWWW THE FUUUUUUCCKKK WE ANCHOR THIS POSITION JUST LIKE THE USER WANTS/???????????
-            planeNode.position = convertDoubleToV3(doubles: filteredDownload[0].position!)
-            
-            
-            planeNode.rotation = convertDoubleToV4(doubles: filteredDownload[0].rotation!)
-            
-            planeNode.eulerAngles.x = -.pi / 2
-            
-            
-            node.addChildNode(planeNode)
+                
+                
+                
+                // Create a plane to visualize the initial position of the detected image.
+                let plane = SCNPlane(width: referenceImage.physicalSize.width,
+                                     height: referenceImage.physicalSize.height)
+                let planeNode = SCNNode(geometry: plane)
+                // planeNode.opacity = 1
+                
+                
+                let material = SCNMaterial()
+                material.diffuse.contents = image
+                material.isDoubleSided = true
+                planeNode.geometry?.materials = [material]
+                
+                //
+                //HOWWWWWWW THE FUUUUUUCCKKK WE ANCHOR THIS POSITION JUST LIKE THE USER WANTS/???????????
+                planeNode.position = convertDoubleToV3(doubles: filteredDownload[0].position!)
+                planeNode.scale = SCNVector3(0, 0, 0)
+                planeNode.opacity = 0
+                planeNode.rotation = convertDoubleToV4(doubles: filteredDownload[0].rotation!)
+                
+                planeNode.eulerAngles.x = -.pi / 2
+                
+                planeNode.runAction(popUpAction)
+                
+                //does not work
+                node.addChildNode(planeNode)
             }
         }
         
         //Run when image detected
     }
-    //MARK: - Func
     
-    func loadImageFrom(url: URL, completionHandler:@escaping(UIImage)->()) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        print("LOADED ASSET");
-                        completionHandler(image);
-                    }
-                }
-            }
-        }
-    }
+    //MARK: - Tracking
     
     
     public func resetTracking() {
@@ -168,7 +165,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
                 let arRefImage = ARReferenceImage(image.cgImage!, orientation: .up, physicalWidth: 0.5)
                 arRefImage.name = download.objectIdentifier
                 self.newReferenceImages.insert(arRefImage)
-               
+                
                 
                 print("fired")
                 
@@ -187,9 +184,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             
             
             
-//            loadImageFrom(url: download.assets!) { (image) in
-//                self.assetsToPopUp?.append(image)
-//            }
+            //            loadImageFrom(url: download.assets!) { (image) in
+            //                self.assetsToPopUp?.append(image)
+            //            }
         }
     }
     

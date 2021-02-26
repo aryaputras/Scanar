@@ -28,13 +28,18 @@ import UIKit
 
 
 
-class AddObjectViewController: UIViewController {
+class AddObjectViewController: UIViewController, UITextFieldDelegate {
     
     var numberOfItems: Int = 3
     
     @IBOutlet weak var addObjectCollectionView: UICollectionView!
     @IBOutlet weak var zoneIDLabel: UILabel!
     
+    @IBOutlet weak var textfield: UITextField!
+    
+    
+    
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +47,11 @@ class AddObjectViewController: UIViewController {
         self.addObjectCollectionView.dataSource = self
         
         self.addObjectCollectionView.register(AddObjectCollectionViewCell.nib(), forCellWithReuseIdentifier: "AddObjectCollectionViewCell")
-     
-      
+        initializeHideKeyboard()
+        textfield.delegate = self
+        textFieldShouldReturn(textfield)
         zoneIDLabel.text = GenerateRandom()
-        
+      
         DataManager.shared.firstVC = self
     }
 
@@ -88,12 +94,28 @@ class AddObjectViewController: UIViewController {
 
         }
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    func initializeHideKeyboard(){
+        //Declare a Tap Gesture Recognizer which will trigger our dismissMyKeyboard() function
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissMyKeyboard))
+        //Add this tap gesture recognizer to the parent view
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissMyKeyboard(){
+        //endEditing causes the view (or one of its embedded text fields) to resign the first responder status.
+        //In short- Dismiss the active keyboard.
+        view.endEditing(true)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        //SEND ZONEID
         if segue.identifier == "rootToAddZone" {
             let vc = segue.destination as! AddNewZoneViewController
-            
+            vc.zoneName = textfield.text
             vc.zoneID = zoneIDLabel.text
         }
     }

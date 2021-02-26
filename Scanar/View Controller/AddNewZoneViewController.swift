@@ -7,11 +7,11 @@
 
 import UIKit
 
-class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     var senderTag: Int?
     var zoneID: String?
-   
+    var zoneName: String?
     
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var chooseBuuton: UIButton!
@@ -23,12 +23,9 @@ class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegat
     var imagePicker: ImagePicker!
     
     
-    @IBOutlet weak var textfield: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeHideKeyboard()
-        textfield.delegate = self
-        textFieldShouldReturn(textfield)
+    
         // Do any additional setup after loading the view.
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
@@ -51,31 +48,14 @@ class AddNewZoneViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func anchorClicked(_ sender: Any) {
     }
-    //MARK: - Keyboard
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    func initializeHideKeyboard(){
-        //Declare a Tap Gesture Recognizer which will trigger our dismissMyKeyboard() function
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(dismissMyKeyboard))
-        //Add this tap gesture recognizer to the parent view
-        view.addGestureRecognizer(tap)
-    }
-    @objc func dismissMyKeyboard(){
-        //endEditing causes the view (or one of its embedded text fields) to resign the first responder status.
-        //In short- Dismiss the active keyboard.
-        view.endEditing(true)
-    }
+ 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "objectToAnchor" {
             
             let vc = segue.destination as! AnchoringViewController
             vc.zoneID = zoneID
-            vc.zoneName = textfield.text
+            vc.zoneName = zoneName
             vc.refImage = imageView.image
             vc.assetImage = imageView2.image
 
