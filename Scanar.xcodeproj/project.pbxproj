@@ -40,6 +40,7 @@
 		C08F4CA625981E3F00E60EEA /* AddObjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08F4CA425981E3F00E60EEA /* AddObjectCollectionViewCell.swift */; };
 		C0F464EC259824F100E188FA /* AddObjectCollectionViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = C08F4CA525981E3F00E60EEA /* AddObjectCollectionViewCell.xib */; };
 		C0F51B5525E8FA13002B88B7 /* LoadAssetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F51B5425E8FA13002B88B7 /* LoadAssetHelper.swift */; };
+		C0F51B5A25E918E8002B88B7 /* InfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F51B5925E918E8002B88B7 /* InfoList.swift */; };
 		C0F877A32589F04000E5C075 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F877A22589F04000E5C075 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		C08F4CA525981E3F00E60EEA /* AddObjectCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddObjectCollectionViewCell.xib; path = /Users/aryaputraspro/Documents/Scanar/Scanar/AddObjectCollectionViewCell.xib; sourceTree = "<absolute>"; };
 		C0CD6B00258BB54300291E9E /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = /Users/aryaputraspro/Documents/Scanar/Scanar/MainStoryboard.storyboard; sourceTree = "<absolute>"; };
 		C0F51B5425E8FA13002B88B7 /* LoadAssetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAssetHelper.swift; sourceTree = "<group>"; };
+		C0F51B5925E918E8002B88B7 /* InfoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoList.swift; sourceTree = "<group>"; };
 		C0F877A22589F04000E5C075 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,13 +133,12 @@
 			children = (
 				C003CF82258903DA00898752 /* Scanar.entitlements */,
 				C003CF6A2588FF2F00898752 /* AppDelegate.swift */,
+				C0CD6B00258BB54300291E9E /* MainStoryboard.storyboard */,
 				C003CF6C2588FF2F00898752 /* art.scnassets */,
 				C03000A62589F86900EF5EA6 /* Helper */,
 				C0FA84002589F69300BC998D /* View Controller */,
 				C003CF732588FF3100898752 /* Assets.xcassets */,
 				C058F3652599C26C00F40A89 /* Model */,
-				C0CD6B00258BB54300291E9E /* MainStoryboard.storyboard */,
-				C0634CC6258BC702006661BF /* Scanar.xcdatamodeld */,
 				C003CF752588FF3100898752 /* LaunchScreenStoryboard.storyboard */,
 				C003CF782588FF3100898752 /* Info.plist */,
 			);
@@ -155,6 +156,7 @@
 		C03000A62589F86900EF5EA6 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				C0F51B5925E918E8002B88B7 /* InfoList.swift */,
 				C0F51B5425E8FA13002B88B7 /* LoadAssetHelper.swift */,
 				C003CF7F2588FF9200898752 /* Helper.swift */,
 				C003CF8B258983DA00898752 /* Networking.swift */,
@@ -168,6 +170,7 @@
 		C058F3652599C26C00F40A89 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C0634CC6258BC702006661BF /* Scanar.xcdatamodeld */,
 				C058F3622599C26800F40A89 /* Model.swift */,
 			);
 			path = Model;
@@ -282,6 +285,7 @@
 				C03000B0258AF68800EF5EA6 /* JoinViewController.swift in Sources */,
 				C058F3602599C0F300F40A89 /* AddObjectViewController+UICollectionView.swift in Sources */,
 				C0634CD5258BC98B006661BF /* Downloaded+CoreDataProperties.swift in Sources */,
+				C0F51B5A25E918E8002B88B7 /* InfoList.swift in Sources */,
 				C003CF882589063700898752 /* QRScanViewController.swift in Sources */,
 				C003CF8C258983DA00898752 /* Networking.swift in Sources */,
 				C003CF6F2588FF2F00898752 /* ARViewController.swift in Sources */,
